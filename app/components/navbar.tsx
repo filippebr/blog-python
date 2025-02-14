@@ -1,5 +1,5 @@
-import { IKImage } from 'imagekitio-react'
 import { useState } from "react"
+import { Image } from './image'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -8,12 +8,7 @@ export function Navbar() {
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       {/* LOGO */}
       <div className="flex items-center gap-4 text-2xl font-bold">
-        <IKImage 
-          urlEndpoint={import.meta.env.VITE_IMGKIT_URL_ENDPOINT} 
-          path="/logo.png" 
-          className="w-8 h-8" 
-          alt="" 
-        />
+        <Image src="/logo.png" alt="Dev Logo" w={32} h={32} />
         <span>devlog</span>
       </div>
       {/* MOBILE MENU */}
