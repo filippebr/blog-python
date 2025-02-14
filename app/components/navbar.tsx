@@ -17,8 +17,8 @@ export function Navbar() {
           {open ? "X" : "≡­­­­"}
         </div>
         {/* MOBILE LINK LIST */}
-        <div className="">
-
+        <div className="w-full h-screen flex flex-col items-center justify-center absolute top-16 bg-red-400">
+          menu
         </div>
       </div>
       {/* DESKTOP MENU */}
