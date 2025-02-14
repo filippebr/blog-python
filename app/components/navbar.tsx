@@ -24,8 +24,14 @@ export function Navbar() {
         </div>
       </div>
       {/* DESKTOP MENU */}
-      <div className="hidden md:flex">
+      <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
         <a href="/">Home</a>
+        <a href="/">Trending</a>
+        <a href="/">Most Popular</a>
+        <a href="/">About</a>
+        <a href="/">
+          <button>Login 👋</button>
+        </a>
       </div>
     </div>
   )
