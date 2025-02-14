@@ -1,8 +1,7 @@
+import { useState } from "react"
 
 export function Navbar() {
-  // const {open, setOpen} = useState(false)
-
-
+  const [open, setOpen] = useState(false)
 
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
@@ -13,8 +12,13 @@ export function Navbar() {
       </div>
       {/* MOBILE MENU */}
       <div className="md:hidden">
-        <div className="cursor-pointer text-4xl">
+        {/* MOBILE BUTTON */}
+        <div className="cursor-pointer text-4xl" onClick={() => setOpen((prev) => !prev)}>
           {open ? "X" : "≡­­­­"}
+        </div>
+        {/* MOBILE LINK LIST */}
+        <div className="">
+
         </div>
       </div>
       {/* DESKTOP MENU */}
