@@ -17,12 +17,16 @@ export function Navbar() {
           {open ? "X" : "≡­­­­"}
         </div>
         {/* MOBILE LINK LIST */}
-        <div className="w-full h-screen flex flex-col items-center justify-center absolute top-16 bg-red-400">
+        <div className={`w-full h-screen flex flex-col items-center justify-center absolute top-16 bg-red-400 transition-all ease-in-out ${
+          open ? "-right-0" : "-right-[100%]"
+          }`}>
           menu
         </div>
       </div>
       {/* DESKTOP MENU */}
-      <div className="hidden md:flex">D</div>
+      <div className="hidden md:flex">
+        <a href="/">Home</a>
+      </div>
     </div>
   )
 }
