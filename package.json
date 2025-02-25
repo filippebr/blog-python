@@ -9,6 +9,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.23.0",
     "@react-router/node": "^7.1.5",
     "@react-router/serve": "^7.1.5",
     "imagekitio-react": "^4.2.0",
