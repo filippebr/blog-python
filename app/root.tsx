@@ -1,3 +1,4 @@
+import { rootAuthLoader } from '@clerk/react-router/ssr.server'
 import {
   isRouteErrorResponse,
   Links,
@@ -9,6 +10,11 @@ import {
 import type { Route } from "./+types/root"
 import "./app.css"
 import MainLayout from "./layouts/mainlayout"
+
+// Clerk Setup
+export async function loader(args: Route.LoaderArgs) {
+  return rootAuthLoader(args)
+}
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
