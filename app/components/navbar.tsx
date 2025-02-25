@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router"
 import { Image } from './image'
 
 export function Navbar() {
@@ -7,10 +8,10 @@ export function Navbar() {
   return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
       {/* LOGO */}
-      <div className="flex items-center gap-4 text-2xl font-bold">
+      <Link to="/" className="flex items-center gap-4 text-2xl font-bold">
         <Image src="/logo.png" alt="Dev Logo" w={32} h={32} />
         <span>devlog</span>
-      </div>
+      </Link>
       {/* MOBILE MENU */}
       <div className="md:hidden">
         {/* MOBILE BUTTON */}
