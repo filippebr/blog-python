@@ -1,10 +1,12 @@
-import { type RouteConfig, index, route } from "@react-router/dev/routes"
+import { type RouteConfig, index, prefix, route } from "@react-router/dev/routes"
 
 export default [
   index("routes/home.tsx"), 
+  // route("postlist", "routes/postlist.tsx"),
+  // route("postlist/:slug", "routes/postlist.tsx"),
+  route("write", "routes/write.tsx"),
   route("login", "routes/login.tsx"),
   route("register", "routes/register.tsx"),
-  route("postlist/:slug", "routes/postlist.tsx"),
 
   // Nested Routes
   // route("dashboard", "routes/dashboard.tsx", [
@@ -13,9 +15,9 @@ export default [
   // ]),
 
   // prefix Routes
-  // ...prefix("postlist", [
-  //   index("routes/postlist.tsx"),
-  //   route(":slug", "routes/slug.tsx"),
-  // ]),
-  route("singlepost", "routes/singlepost.tsx"),
+  ...prefix("postlist", [
+    index("routes/postlist.tsx"),
+    route(":slug", "routes/singlepost.tsx"),
+  ]),
+  // route("singlepost", "routes/singlepost.tsx"),
 ] satisfies RouteConfig;
