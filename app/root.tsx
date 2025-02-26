@@ -1,4 +1,3 @@
-import { rootAuthLoader } from '@clerk/react-router/ssr.server'
 import {
   isRouteErrorResponse,
   Links,
@@ -13,9 +12,9 @@ import "./app.css"
 import MainLayout from "./layouts/mainlayout"
 
 // Clerk Setup
-export async function loader(args: Route.LoaderArgs) {
-  return rootAuthLoader(args)
-}
+// export async function loader(args: Route.LoaderArgs) {
+//   return rootAuthLoader(args)
+// }
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -48,14 +47,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
 export default function App({ loaderData }: Route.ComponentProps) {
   return (
     <ClerkProvider
-      publishableKey={import.meta.env.CLERK_PUBLISHABLE_KEY}
+      // loaderData={loaderData}
+      signUpFallbackRedirectUrl="/"
+      signInFallbackRedirectUrl="/"
+      publishableKey={PUBLISHABLE_KEY}
     >
       <MainLayout />
     </ClerkProvider>
-
   );
 }
 
