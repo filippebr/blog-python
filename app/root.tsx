@@ -7,6 +7,7 @@ import {
   ScrollRestoration
 } from "react-router"
 
+import { ClerkProvider } from '@clerk/clerk-react'
 import type { Route } from "./+types/root"
 import "./app.css"
 import MainLayout from "./layouts/mainlayout"
@@ -47,8 +48,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
-  return <MainLayout />;
+export default function App({ loaderData }: Route.ComponentProps) {
+  return (
+    <ClerkProvider
+      publishableKey={import.meta.env.CLERK_PUBLISHABLE_KEY}
+    >
+      <MainLayout />
+    </ClerkProvider>
+
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
