@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import Image from "./image"
 
 export default function FeaturedPosts() {
@@ -8,6 +9,11 @@ export default function FeaturedPosts() {
       {/* image */}
       <Image src="/featured1.jpeg" alt="first featured" className="rounded-3xl object-cover" w={100} h={100} />
       {/* details */}
+      <div className="flex items-center gap-4">
+        <h1 className="font-semibold lg:text-lg">01.</h1>
+        <Link to="" className="text-blue-800 lg:text-lg">Web Design</Link>
+        <span className="text-gray-500">2 days ago</span>
+      </div>
       {/* title */}
       </div>
       {/* Others */}
