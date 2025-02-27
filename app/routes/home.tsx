@@ -9,9 +9,8 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <div className="px-4 md:px-8 lg:px-16 lx:px-32 2xl:px-64">
+    <div className="mt-4 flex flex-col gap-4">
       Home Page
-      {/* NAVBAR */}
       {/* BREADCRUMB */}
       {/* INTRODUCTION */}
       {/* FEATURED POST */}
