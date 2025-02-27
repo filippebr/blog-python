@@ -26,8 +26,11 @@ export default function MainCategories() {
           Marketing
         </Link>
       </div>
+      <span className="text-xl font-medium">|</span>
       {/* search */}
-      <div className="">Search</div>
+      <div className="bg-gray-100 p-2 rounded-full flex items-center gap-2">
+        
+      </div>
     </div>
   )
 }
