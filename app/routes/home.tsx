@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import MainCategories from "~/components/maincategories"
 import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
@@ -63,6 +64,8 @@ export default function Home() {
           </button>
         </Link>
       </div>
+      {/* CATEGORIES */}
+      <MainCategories />
       {/* FEATURED POST */}
       {/* POST LIST */}
     </div>
