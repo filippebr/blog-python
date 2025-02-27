@@ -11,7 +11,6 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div className="mt-4 flex flex-col gap-4">
-      Home Page
       {/* BREADCRUMB */}
       <div className="flex gap-4">
         <Link to="/">Home</Link>
@@ -31,7 +30,7 @@ export default function Home() {
           </p>
         </div>
         {/* animated button */}
-        <Link to="write" className="relative">
+        <Link to="write" className="hidden md:block relative">
           <svg
             viewBox="0 0 200 200"
             width="200"
