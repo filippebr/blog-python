@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import FeaturedPosts from "~/components/featuredposts"
 import MainCategories from "~/components/maincategories"
 import type { Route } from "./+types/home"
 
@@ -67,6 +68,7 @@ export default function Home() {
       {/* CATEGORIES */}
       <MainCategories />
       {/* FEATURED POST */}
+      <FeaturedPosts />
       {/* POST LIST */}
     </div>
   )
