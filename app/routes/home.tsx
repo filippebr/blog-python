@@ -19,6 +19,20 @@ export default function Home() {
         <span className="text-blue-800">Blogs and Articles</span>
       </div>
       {/* INTRODUCTION */}
+      <div className="flex items-center justify-between">
+        {/* titles   */}
+        <div className="">
+          <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod itaque quis deserunt, 
+            nesciunt saepe unde adipisci.
+          </p>
+        </div>
+        {/* animated button */}
+        <Link to="write"></Link>
+      </div>
       {/* FEATURED POST */}
       {/* POST LIST */}
     </div>
