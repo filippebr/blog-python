@@ -8,7 +8,7 @@ type ImageProps = {
   alt: string
 }
 
-export function Image({src, className, w, h, alt}: ImageProps) {
+export default function Image({src, className, w, h, alt}: ImageProps) {
   return (
     <IKImage 
       urlEndpoint={import.meta.env.VITE_IMGKIT_URL_ENDPOINT} 
