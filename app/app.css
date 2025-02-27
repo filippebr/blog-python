@@ -10,3 +10,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
 }
+
+.animatedButton {
+  animation-duration: 10000ms; 
+}
