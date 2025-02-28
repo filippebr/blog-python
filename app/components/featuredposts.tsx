@@ -23,18 +23,69 @@ export default function FeaturedPosts() {
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* second */}
         <div className="lg:h-1/3 flex justify-between gap-4">
-          <Image src="featured2.jpeg" alt="second featured" w={600} h={400} className="rounded-3xl object-cover w-1/3 " />
+          <Image 
+            src="featured2.jpeg" 
+            alt="second featured" 
+            w={600} 
+            h={400} 
+            className="rounded-3xl object-cover w-1/3 aspect-video" 
+          />
             {/* details and title */}
+            <div className="w-2/3"></div>
+            {/* details */}
+            <div className="">
+              <h1>02.</h1>
+              <Link to="">Web Design</Link>
+              <span className="text-gray-500">2 days ago</span>
+            </div>
+            {/* title */}
+            <Link to="/test">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </Link>
         </div>
         {/* third */}
         <div className="lg:h-1/3 flex justify-between gap-4">
-          <Image src="featured3.jpeg" alt="third featured" w={600} h={400} className="rounded-3xl object-cover w-1/3 " />
+          <Image 
+            src="featured3.jpeg" 
+            alt="third featured" 
+            w={600} 
+            h={400} 
+            className="rounded-3xl object-cover w-1/3 aspect-video" 
+          />
             {/* details and title */}
+            <div className="w-2/3"></div>
+            {/* details */}
+            <div className="">
+              <h1>02.</h1>
+              <Link to="">Web Design</Link>
+              <span className="text-gray-500">2 days ago</span>
+            </div>
+            {/* title */}
+            <Link to="/test">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </Link>
         </div>
         {/* fourth */}
         <div className="lg:h-1/3 flex justify-between gap-4">
-          <Image src="featured4.jpeg" alt="fourth featured" w={600} h={400} className="rounded-3xl object-cover w-1/3 " />
+          <Image 
+            src="featured4.jpeg" 
+            alt="fourth featured" 
+            w={600} 
+            h={400} 
+            className="rounded-3xl object-cover w-1/3 aspect-video" 
+          />
             {/* details and title */}
+            <div className="w-2/3"></div>
+            {/* details */}
+            <div className="">
+              <h1>02.</h1>
+              <Link to="">Web Design</Link>
+              <span className="text-gray-500">2 days ago</span>
+            </div>
+            {/* title */}
+            <Link to="/test">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </Link>
         </div>
       </div>
     </div>
