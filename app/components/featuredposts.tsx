@@ -21,7 +21,21 @@ export default function FeaturedPosts() {
       </div>
       {/* Others */}
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
-
+        {/* second */}
+        <div className="lg:h-1/3 flex justify-between gap-4">
+          <Image src="featured2.jpeg" alt="second featured" w={600} h={400} className="rounded-3xl object-cover w-1/3 " />
+            {/* details and title */}
+        </div>
+        {/* third */}
+        <div className="lg:h-1/3 flex justify-between gap-4">
+          <Image src="featured3.jpeg" alt="third featured" w={600} h={400} className="rounded-3xl object-cover w-1/3 " />
+            {/* details and title */}
+        </div>
+        {/* fourth */}
+        <div className="lg:h-1/3 flex justify-between gap-4">
+          <Image src="featured4.jpeg" alt="fourth featured" w={600} h={400} className="rounded-3xl object-cover w-1/3 " />
+            {/* details and title */}
+        </div>
       </div>
     </div>
   )
