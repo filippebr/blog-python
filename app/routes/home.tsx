@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 import FeaturedPosts from "~/components/featuredposts"
 import MainCategories from "~/components/maincategories"
+import PostList from "~/components/postlist"
 import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
@@ -72,6 +73,7 @@ export default function Home() {
       {/* POST LIST */}
       <div className="">
         <h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
+        <PostList />
       </div>
     </div>
   )
