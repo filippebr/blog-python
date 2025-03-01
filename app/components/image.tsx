@@ -3,8 +3,8 @@ import { IKImage } from "imagekitio-react"
 type ImageProps = {
   src: string,
   className?: string,
-  w: number,
-  h: number,
+  w?: number,
+  h?: number,
   alt: string
 }
 
