@@ -6,7 +6,7 @@ export default function PostListItem() {
     <div className="flex flex-col xl:flex-row gap-8">
       {/* image */}
       <div className="md:hidden xl:block xl:w-1/3">
-        <Image src="postImg.jpeg" alt="post image" className="rounded-2xl object-cover" w="800" />
+        <Image src="postImg.jpeg" alt="post image" className="rounded-2xl object-cover" w="735" />
       </div>
       {/* details */}
       <div className="flex flex-col gap-4 xl:w-2/3">

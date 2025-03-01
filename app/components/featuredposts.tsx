@@ -7,7 +7,7 @@ export default function FeaturedPosts() {
       {/* First */}
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
       {/* image */}
-      <Image src="featured1.jpeg" alt="first featured" className="rounded-3xl object-cover" />
+      <Image src="featured1.jpeg" alt="first featured" className="rounded-3xl object-cover" w="895" />
       {/* details */}
       <div className="flex items-center gap-4">
         <h1 className="font-semibold lg:text-lg">01.</h1>
@@ -23,11 +23,14 @@ export default function FeaturedPosts() {
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* second */}
         <div className="lg:h-1/3 flex justify-between gap-4">
-          <Image 
-            src="featured2.jpeg" 
-            alt="second featured"
-            className="rounded-3xl object-cover w-1/3 aspect-video" 
-          />
+          <div className="w-1/3 aspect-video">
+            <Image 
+              src="featured2.jpeg" 
+              alt="second featured"
+              className="rounded-3xl object-cover w-full h-full"
+              w="298" 
+            />
+          </div>
           {/* details and title */}
           <div className="w-2/3">
             {/* details */}
@@ -45,11 +48,14 @@ export default function FeaturedPosts() {
         </div>
         {/* third */}
         <div className="lg:h-1/3 flex justify-between gap-4">
-          <Image 
-            src="featured3.jpeg" 
-            alt="third featured" 
-            className="rounded-3xl object-cover w-1/3 aspect-video" 
-          />
+          <div className="w-1/3 aspect-video">
+            <Image 
+              src="featured3.jpeg" 
+              alt="second featured"
+              className="rounded-3xl object-cover w-full h-full"
+              w="298" 
+            />
+          </div>
           {/* details and title */}
           <div className="w-2/3">
             {/* details */}
@@ -67,11 +73,14 @@ export default function FeaturedPosts() {
         </div>
         {/* fourth */}
         <div className="lg:h-1/3 flex justify-between gap-4">
-          <Image 
-            src="featured4.jpeg" 
-            alt="fourth featured" 
-            className="rounded-3xl object-cover w-1/3 aspect-video" 
-          />
+          <div className="w-1/3 aspect-video">
+            <Image 
+              src="featured4.jpeg" 
+              alt="second featured"
+              className="rounded-3xl object-cover w-full h-full"
+              w="298" 
+            />
+          </div>
           {/* details and title */}
           <div className="w-2/3">
             {/* details */}
