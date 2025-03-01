@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import Image from "./image"
 
 export default function PostListItem() {
@@ -8,7 +9,12 @@ export default function PostListItem() {
         <Image src="postImg.jpeg" alt="post image" className="rounded-2xl object-cover" />
       </div>
       {/* details */}
-
+      <div className="">
+        <Link to="/test" className="text-4xl font-semibold">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis vero quia, illum dolorem.
+        </Link>
+      </div>
+      <div className=""></div>
     </div>
   )
 }
