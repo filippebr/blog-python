@@ -9,7 +9,7 @@ export default function PostListItem() {
         <Image src="postImg.jpeg" alt="post image" className="rounded-2xl object-cover" />
       </div>
       {/* details */}
-      <div className="">
+      <div className="flex flex-col gap-4">
         <Link to="/test" className="text-4xl font-semibold">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis vero quia, illum dolorem.
         </Link>
@@ -20,6 +20,12 @@ export default function PostListItem() {
           <Link to="" className="text-blue-800">Web Design</Link>
           <span>2 days ago</span>
         </div>  
+        <p className="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eaque tempora quam voluptate? 
+          Iste numquam voluptates veritatis molestiae officiis fugiat optio laudantium assumenda consectetur 
+          ipsam? A sit enim nemo dicta.
+        </p>
+        <Link to="/test">Read More</Link>
       </div>
       
     </div>
