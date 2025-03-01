@@ -13,14 +13,15 @@ export default function PostListItem() {
         <Link to="/test" className="text-4xl font-semibold">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis vero quia, illum dolorem.
         </Link>
+        <div className="flex items-center gap-2 text-gray-400 text-sm">
+          <span>Written by</span>
+          <Link to="" className="text-blue-800">John Doe</Link>
+          <span>on</span>
+          <Link to="" className="text-blue-800">Web Design</Link>
+          <span>2 days ago</span>
+        </div>  
       </div>
-      <div className="flex items-center gap-2 text-gray-400 text-sm">
-        <span>Written by</span>
-        <Link to="">John Doe</Link>
-        <span>on</span>
-        <Link to="">Web Design</Link>
-        <span>2 days ago</span>
-      </div>
+      
     </div>
   )
 }
