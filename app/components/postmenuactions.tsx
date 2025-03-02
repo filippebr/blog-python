@@ -2,7 +2,7 @@ export default function PostMenuActions() {
   return (
     <div className="">
       <h1>Actions</h1>
-      <div className="">
+      <div className="flex items-center gap-2 py-2 text-sm cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 48 48"
