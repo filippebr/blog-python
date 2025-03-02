@@ -29,7 +29,37 @@ export default function SinglePost() {
         <div className=""></div>
       </div>
       {/* content */}
-
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* text */}
+        <div className="lg:text-lg flex flex-col gap-6 text-justify">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+        </div>
+        {/* menu */}
+        <div className=""></div>
+      </div>
     </div>
   )
 }
