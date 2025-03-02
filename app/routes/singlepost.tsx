@@ -58,7 +58,28 @@ export default function SinglePost() {
           </p>
         </div>
         {/* menu */}
-        <div className=""></div>
+        <div className="px-4 h-max sticky top-8">
+          <h1>Author</h1>
+          <div className="">
+            <Image 
+              src="userImg.jpeg" 
+              alt="author image menu" 
+              className="w-12 h-12 rounded-full object-cover" 
+              w="48" 
+              h="48" 
+            />
+            <Link to="">John Doe</Link>
+            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            <div className="flex gap-2 ">
+              <Link to="">
+                <Image src="facebook.svg" alt="facebook"/>
+              </Link>
+              <Link to="">
+                <Image src="instagram.svg" alt="instagram"/>              
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
