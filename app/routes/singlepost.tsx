@@ -24,7 +24,7 @@ export default function SinglePost() {
           </p>     
         </div>
         <div className="hidden lg:block w-2/5">
-          <Image src="postImg.jpeg" alt="single post" />
+          <Image src="postImg.jpeg" alt="single post" w="600" className="rounded-2xl" />
         </div>
         <div className=""></div>
       </div>
