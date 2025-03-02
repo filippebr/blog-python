@@ -1,5 +1,6 @@
 import { Link } from "react-router"
 import Image from "~/components/image"
+import PostMenuActions from "~/components/postmenuactions"
 
 export default function SinglePost() {
   return (
@@ -79,6 +80,7 @@ export default function SinglePost() {
               </Link>
             </div>
           </div>
+          <PostMenuActions />
         </div>
       </div>
     </div>
