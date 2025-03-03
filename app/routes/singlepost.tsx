@@ -81,6 +81,18 @@ export default function SinglePost() {
             </div>
           </div>
           <PostMenuActions />
+          <h1>Categories</h1>
+          <div className="flex flex-col gap-2 text-sm">
+            <Link to="/" className="underline">All</Link>
+            <Link to="/" className="underline">Web Design</Link>
+            <Link to="/" className="underline">Development</Link>
+            <Link to="/" className="underline">Databases</Link>
+            <Link to="/" className="underline">Search Engines</Link>
+            <Link to="/" className="underline">Marketing</Link>
+            <Link to="/" className="underline">All</Link>
+          </div>
+          <h1>Search</h1>
+          
         </div>
       </div>
     </div>
