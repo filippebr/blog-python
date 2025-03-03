@@ -41,6 +41,9 @@ export default function SinglePost() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
             Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
             Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
           </p>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
@@ -49,8 +52,58 @@ export default function SinglePost() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
             Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
             Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
           </p>
           <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
+            Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
+            Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, quibusdam. 
             Fuga corporis minima voluptatum est quia doloribus numquam necessitatibus? 
             Commodi explicabo, quod beatae fuga iusto veritatis dolorem modi recusandae inventore!
@@ -61,8 +114,8 @@ export default function SinglePost() {
         </div>
         {/* menu */}
         <div className="px-4 h-max sticky top-8">
-          <h1 className="mt-8 mb-4 text-sm font-medium">Author</h1>
-          <div className="">
+          <h1 className="mb-4 text-sm font-medium">Author</h1>
+          <div className="flex items-center gap-8 ">
             <Image 
               src="userImg.jpeg" 
               alt="author image menu" 
@@ -71,15 +124,15 @@ export default function SinglePost() {
               h="48" 
             />
             <Link to="">John Doe</Link>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
-            <div className="flex gap-2 ">
-              <Link to="">
-                <Image src="facebook.svg" alt="facebook"/>
-              </Link>
-              <Link to="">
-                <Image src="instagram.svg" alt="instagram"/>              
-              </Link>
-            </div>
+          </div>
+          <p>Lorem ipsum dolor sit amet consectetur.</p>
+          <div className="flex gap-2 ">
+            <Link to="">
+              <Image src="facebook.svg" alt="facebook"/>
+            </Link>
+            <Link to="">
+              <Image src="instagram.svg" alt="instagram"/>              
+            </Link>
           </div>
           <PostMenuActions />
           <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
