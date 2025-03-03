@@ -1,6 +1,7 @@
 import { Link } from "react-router"
 import Image from "~/components/image"
 import PostMenuActions from "~/components/postmenuactions"
+import Search from "~/components/search"
 
 export default function SinglePost() {
   return (
@@ -92,7 +93,7 @@ export default function SinglePost() {
             <Link to="/" className="underline">All</Link>
           </div>
           <h1>Search</h1>
-          
+          <Search />
         </div>
       </div>
     </div>
