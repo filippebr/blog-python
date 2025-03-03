@@ -115,24 +115,26 @@ export default function SinglePost() {
         {/* menu */}
         <div className="px-4 h-max sticky top-8">
           <h1 className="mb-4 text-sm font-medium">Author</h1>
-          <div className="flex items-center gap-8 ">
-            <Image 
-              src="userImg.jpeg" 
-              alt="author image menu" 
-              className="w-12 h-12 rounded-full object-cover" 
-              w="48" 
-              h="48" 
-            />
-            <Link to="">John Doe</Link>
-          </div>
-          <p>Lorem ipsum dolor sit amet consectetur.</p>
-          <div className="flex gap-2 ">
-            <Link to="">
-              <Image src="facebook.svg" alt="facebook"/>
-            </Link>
-            <Link to="">
-              <Image src="instagram.svg" alt="instagram"/>              
-            </Link>
+          <div className="flex flex-col gap-4">          
+            <div className="flex items-center gap-8 ">
+              <Image 
+                src="userImg.jpeg" 
+                alt="author image menu" 
+                className="w-12 h-12 rounded-full object-cover" 
+                w="48" 
+                h="48" 
+              />
+              <Link to="" className="text-blue-800">John Doe</Link>
+            </div>
+            <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur. Iste odit voluptas eaque sunt optio eius iure sed doloremque harum.</p>
+            <div className="flex gap-2 ">
+              <Link to="">
+                <Image src="facebook.svg" alt="facebook"/>
+              </Link>
+              <Link to="">
+                <Image src="instagram.svg" alt="instagram"/>              
+              </Link>
+            </div>
           </div>
           <PostMenuActions />
           <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
