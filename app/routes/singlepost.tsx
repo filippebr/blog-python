@@ -61,7 +61,7 @@ export default function SinglePost() {
         </div>
         {/* menu */}
         <div className="px-4 h-max sticky top-8">
-          <h1>Author</h1>
+          <h1 className="mt-8 mb-4 text-sm font-medium">Author</h1>
           <div className="">
             <Image 
               src="userImg.jpeg" 
@@ -82,7 +82,7 @@ export default function SinglePost() {
             </div>
           </div>
           <PostMenuActions />
-          <h1>Categories</h1>
+          <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/" className="underline">All</Link>
             <Link to="/" className="underline">Web Design</Link>
@@ -92,7 +92,7 @@ export default function SinglePost() {
             <Link to="/" className="underline">Marketing</Link>
             <Link to="/" className="underline">All</Link>
           </div>
-          <h1>Search</h1>
+          <h1 className="mt-8 mb-4 text-sm font-medium">Search</h1>
           <Search />
         </div>
       </div>
