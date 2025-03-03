@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import Comments from "~/components/comments"
 import Image from "~/components/image"
 import PostMenuActions from "~/components/postmenuactions"
 import Search from "~/components/search"
@@ -151,6 +152,7 @@ export default function SinglePost() {
           <Search />
         </div>
       </div>
+      <Comments />
     </div>
   )
 }
