@@ -29,6 +29,7 @@ export default function Write() {
             <option value="marketing">Marketing</option>
           </select>
         </div>
+        <textarea name="desc" placeholder="A Short Description" />
       </form>
     </div>
   )
