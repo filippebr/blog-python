@@ -41,7 +41,7 @@ export default function Write() {
             className="flex-1 rounded-xl bg-white shadow-md"
           />
         </Suspense>
-        <button>Send</button>
+        <button className="bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36">Send</button>
       </form>
     </div>
   )
