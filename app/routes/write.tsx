@@ -19,9 +19,9 @@ export default function Write() {
 
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
-      <h1 >Create a New Post</h1>
-      <form action="">
-        <button>Add a cover image</button>
+      <h1 className="text-xl font-light">Create a New Post</h1>
+      <form className="flex flex-col gap-6 flex-1 mb-6">
+        <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button>
         <input type="text" placeholder="My Awesome Story" />
         <div className="">
           <label htmlFor="">Choose a category:</label>
@@ -38,6 +38,7 @@ export default function Write() {
         <Suspense fallback={<p>Loading editor...</p>}>
           <ReactQuill
             theme="snow"
+            className="flex-1"
           />
         </Suspense>
         <button>Send</button>
