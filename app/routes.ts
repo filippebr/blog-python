@@ -16,7 +16,7 @@ export default [
 
   // prefix Routes
   ...prefix("posts", [
-    index("routes/postlist.tsx"),
+    index("routes/postlistpage.tsx"),
     route(":slug", "routes/singlepost.tsx"),
   ]),
   // route("singlepost", "routes/singlepost.tsx"),
