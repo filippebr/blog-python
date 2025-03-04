@@ -1,7 +1,7 @@
 import { useUser } from "@clerk/clerk-react"
-import React from "react"
+import React, { Suspense } from "react"
 // import ReactQuill from "react-quill-new"
-import 'react-quill-new/dist/quill.snow.css'
+// import 'react-quill-new/dist/quill.snow.css'
 
 const ReactQuill = React.lazy(() => import('react-quill-new'))
 
@@ -35,9 +35,11 @@ export default function Write() {
           </select>
         </div>
         <textarea name="desc" placeholder="A Short Description" />
-        <ReactQuill
-          theme="snow"
-        />
+        <Suspense fallback={<p>Loading editor...</p>}>
+          <ReactQuill
+            theme="snow"
+          />
+        </Suspense>
       </form>
     </div>
   )
