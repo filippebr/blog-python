@@ -1,3 +1,4 @@
+import SideMenu from "~/components/sidemenu"
 import PostList from "../components/postlist"
 import type { Route } from "./+types/postlist"
 
@@ -18,7 +19,7 @@ export default function PostListPage({ loaderData }: Route.ComponentProps) {
         <div className="">
           <PostList /> 
         </div>
-        <div className=""></div>
+        <div className=""><SideMenu /></div>
       </div>
     </div>
   )
