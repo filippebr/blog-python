@@ -18,8 +18,8 @@ export default function Write() {
   }
 
   return (
-    <div className="">
-      <h1>Create a New Post</h1>
+    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
+      <h1 >Create a New Post</h1>
       <form action="">
         <button>Add a cover image</button>
         <input type="text" placeholder="My Awesome Story" />
@@ -40,6 +40,7 @@ export default function Write() {
             theme="snow"
           />
         </Suspense>
+        <button>Send</button>
       </form>
     </div>
   )

@@ -32,7 +32,7 @@ export default function SinglePost() {
         <div className=""></div>
       </div>
       {/* content */}
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col md:flex-row gap-12">
         {/* text */}
         <div className="lg:text-lg flex flex-col gap-6 text-justify">
           <p>
