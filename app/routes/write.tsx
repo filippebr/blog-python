@@ -23,9 +23,9 @@ export default function Write() {
       <form className="flex flex-col gap-6 flex-1 mb-6">
         <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button>
         <input className="text-4xl font-semibold bg-transparent outline-none" type="text" placeholder="My Awesome Story" />
-        <div className="">
-          <label htmlFor="">Choose a category:</label>
-          <select name="cat" id="">
+        <div className="flex items-center gap-4">
+          <label htmlFor="" className="text-sm">Choose a category:</label>
+          <select name="cat" id="" className="p-2 rounded-xl bg-white shadow-md">
             <option value="general">General</option>
             <option value="web-design">Web Design</option>
             <option value="development">Development</option>
@@ -34,11 +34,11 @@ export default function Write() {
             <option value="marketing">Marketing</option>
           </select>
         </div>
-        <textarea name="desc" placeholder="A Short Description" />
+        <textarea name="desc" placeholder="A Short Description" className="p-4 rounded-xl bg-white shadow-md" />
         <Suspense fallback={<p>Loading editor...</p>}>
           <ReactQuill
             theme="snow"
-            className="flex-1"
+            className="flex-1 rounded-xl bg-white shadow-md"
           />
         </Suspense>
         <button>Send</button>
