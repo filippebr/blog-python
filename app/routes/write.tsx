@@ -1,4 +1,6 @@
 import { useUser } from "@clerk/clerk-react"
+import ReactQuill from "react-quill-new"
+import 'react-quill-new/dist/quill.snow.css'
 
 export default function Write() {
 
@@ -30,6 +32,7 @@ export default function Write() {
           </select>
         </div>
         <textarea name="desc" placeholder="A Short Description" />
+        <ReactQuill theme="snow" />
       </form>
     </div>
   )

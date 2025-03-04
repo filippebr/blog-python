@@ -11,10 +11,9 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.23.0",
     "@clerk/react-router": "^1.1.0",
-    "@react-router/node": "^7.1.5",
-    "@react-router/serve": "^7.1.5",
     "imagekitio-react": "^4.2.0",
     "isbot": "^5.1.17",
+    "quill": "^2.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-quill-new": "^3.3.3",
