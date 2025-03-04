@@ -22,7 +22,7 @@ export default function Write() {
       <h1 className="text-xl font-light">Create a New Post</h1>
       <form className="flex flex-col gap-6 flex-1 mb-6">
         <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button>
-        <input type="text" placeholder="My Awesome Story" />
+        <input className="text-4xl font-semibold bg-transparent outline-none" type="text" placeholder="My Awesome Story" />
         <div className="">
           <label htmlFor="">Choose a category:</label>
           <select name="cat" id="">
