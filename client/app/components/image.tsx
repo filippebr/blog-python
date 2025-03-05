@@ -16,6 +16,7 @@ type ImageProps = {
 }
 
 export default function Image({src, className, w, h, alt}: ImageProps) {
+
   // Define the transformation array with the typed structure
   const transformations: ImageTransformation[] = [
     {

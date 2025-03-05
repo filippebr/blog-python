@@ -1,7 +1,7 @@
 import { useState } from "react"
 import PostList from "~/components/postlist"
 import SideMenu from "~/components/sidemenu"
-import type { Route } from "./+types/postlist"
+import type { Route } from "./+types/postlistpage"
 
 export async function loader({ params }: Route.LoaderArgs) {
   const postId = params.slug
