@@ -5,6 +5,7 @@ import postRouter from "./routes/post.route.js"
 import userRouter from "./routes/user.route.js"
 
 const app = express()
+app.use(express.json())
 
 // app.get("/test", (req, res) => {
 //   res.status(200).send("it works!")
