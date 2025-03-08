@@ -1,13 +1,8 @@
 import express from 'express'
-import Post from '../models/post.model.js'
+import { getPosts } from '../controllers/post.controller.js'
 
 const router = express.Router()
 
-router.get("/", async (req, res) => {
-
-  const posts = await Post.find()
-
-  res.status(200).send(posts)
-})
+router.get("/", getPosts)
 
 export default router
