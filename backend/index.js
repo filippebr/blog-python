@@ -1,4 +1,4 @@
-import { clerkMiddleware, requireAuth } from '@clerk/express'
+import { clerkMiddleware } from '@clerk/express'
 import express from "express"
 import connectDB from "./lib/connectDB.js"
 import commentRouter from "./routes/comment.route.js"
@@ -24,10 +24,10 @@ app.use(express.json())
 //   res.status(200).json("content")
 // })
 
-app.get("/protect2", requireAuth(), (req, res) => {
+// app.get("/protect2", requireAuth(), (req, res) => {
   
-  res.status(200).json("content")
-})
+//   res.status(200).json("content")
+// })
 
 app.use("/users", userRouter)
 app.use("/posts", postRouter)
