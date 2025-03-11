@@ -1,4 +1,4 @@
-import { clerkMiddleware } from '@clerk/express'
+import { clerkMiddleware, requireAuth } from '@clerk/express'
 import express from "express"
 import connectDB from "./lib/connectDB.js"
 import commentRouter from "./routes/comment.route.js"
@@ -11,9 +11,22 @@ app.use(clerkMiddleware())
 app.use("/webhooks", webhookRouter)
 app.use(express.json())
 
-app.get("/auth-state", (req, res) => {
-  const authState = req.auth
-  res.json(authState)
+// app.get("/auth-state", (req, res) => {
+//   const authState = req.auth
+//   res.json(authState)
+// })
+
+// app.get("/protect", (req, res) => {
+//   const {userId} = req.auth
+//   if(!userId) {
+//     return res.status(401).json("not authenticated")
+//   }
+//   res.status(200).json("content")
+// })
+
+app.get("/protect2", requireAuth(), (req, res) => {
+  
+  res.status(200).json("content")
 })
 
 app.use("/users", userRouter)
