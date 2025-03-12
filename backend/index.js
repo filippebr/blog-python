@@ -7,9 +7,10 @@ import userRouter from "./routes/user.route.js"
 import webhookRouter from "./routes/webhook.route.js"
 
 const app = express()
+
 app.use(clerkMiddleware())
-app.use("/webhooks", webhookRouter)
 app.use(express.json())
+app.use("/webhooks", webhookRouter)
 
 // app.get("/auth-state", (req, res) => {
 //   const authState = req.auth
