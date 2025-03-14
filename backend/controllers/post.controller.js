@@ -14,21 +14,19 @@ export const getPost = async (req, res) => {
 export const createPost = async (req, res) => {
   try {
     const clerkUserId = req.auth.userId
-    console.log("Clerk User ID:", clerkUserId)
-    console.log("Request Body:", req.body)
 
     if (!clerkUserId) {
       return res.status(401).json({ message: "Not authenticated!" })
     }
 
     const user = await User.findOne({ clerkUserId })
-    console.log("Found User:", user)
+
     if (!user) {
       return res.status(404).json({ message: "User not found" })
     }
 
     const newPost = new Post({ user: user._id, ...req.body })
-    console.log("New Post Data:", newPost)
+
     const post = await newPost.save()
     res.status(200).json(post)
   } catch (error) {
