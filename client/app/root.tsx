@@ -11,6 +11,13 @@ import type { Route } from "./+types/root"
 import "./app.css"
 import MainLayout from "./layouts/mainlayout"
 
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
 // Clerk Setup
 // export async function loader(args: Route.LoaderArgs) {
 //   return rootAuthLoader(args)
@@ -57,7 +64,9 @@ export default function App({ loaderData }: Route.ComponentProps) {
       signInFallbackRedirectUrl="/"
       publishableKey={PUBLISHABLE_KEY}
     >
-      <MainLayout />
+      <QueryClientProvider client={queryClient}>
+        <MainLayout />
+      </QueryClientProvider>
     </ClerkProvider>
   );
 }
