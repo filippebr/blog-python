@@ -3,7 +3,7 @@ import axios from "axios"
 import PostListItem from "./postlistitem"
 
 const fetchPosts = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`)
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}posts`)
   
   return res.data
 }
