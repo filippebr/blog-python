@@ -6,7 +6,11 @@ import postRouter from "./routes/post.route.js"
 import userRouter from "./routes/user.route.js"
 import webhookRouter from "./routes/webhook.route.js"
 
+import cors from "cors"
+
 const app = express()
+
+app.use(cors(process.env.CLIENT_URL))
 
 app.use(clerkMiddleware())
 app.use(express.json())
