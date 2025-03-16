@@ -7,6 +7,13 @@ import React, { Suspense, useState } from "react"
 
 const ReactQuill = React.lazy(() => import('react-quill-new'))
 
+type PostData = {
+  title: FormDataEntryValue | null;
+  category: FormDataEntryValue | null;
+  desc: FormDataEntryValue | null;
+  content: string;
+};
+
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
@@ -14,7 +21,7 @@ export default function Write() {
   const { getToken } = useAuth()  
 
   const mutation = useMutation({
-    mutationFn: async (newPost) => {
+    mutationFn: async (newPost: PostData) => {
       const token = await getToken()
       return axios.post('/posts', newPost, {
         headers: {
@@ -44,6 +51,8 @@ export default function Write() {
     }
 
     console.log(data)
+
+    mutation.mutate(data)
   }
 
   return (
