@@ -16,7 +16,9 @@
     "cors": "^2.8.5",
     "express": "^5.0.1",
     "mongoose": "^8.12.1",
-    "react-toastify": "^11.0.5",
     "svix": "^1.61.3"
+  },
+  "devDependencies": {
+    "@types/react-toastify": "^4.0.2"
   }
 }

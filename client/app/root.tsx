@@ -16,6 +16,9 @@ import {
   QueryClientProvider
 } from '@tanstack/react-query'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const queryClient = new QueryClient()
 
 // Clerk Setup
@@ -66,6 +69,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
     >
       <QueryClientProvider client={queryClient}>
         <MainLayout />
+        <ToastContainer />
       </QueryClientProvider>
     </ClerkProvider>
   );
