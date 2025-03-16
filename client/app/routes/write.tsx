@@ -92,7 +92,7 @@ export default function Write() {
         >
           { mutation.isPending ? "Loading..." : "Send" }
         </button>
-        
+        {mutation.isError && <span>{mutation.error.message}</span>}
       </form>
     </div>
   )
