@@ -1,7 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React, { Suspense } from "react"
+import React, { Suspense, useState } from "react"
 // import ReactQuill from "react-quill-new"
 // import 'react-quill-new/dist/quill.snow.css'
 
@@ -10,15 +10,8 @@ const ReactQuill = React.lazy(() => import('react-quill-new'))
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
-  const { getToken } = useAuth()
-
-  if(!isLoaded) {
-    return <div className="">Loading...</div>
-  }
-
-  if(isLoaded && !isSignedIn) {
-    return <div className="">You should login!</div>
-  }
+  const [value, setValue] = useState('')
+  const { getToken } = useAuth()  
 
   const mutation = useMutation({
     mutationFn: async (newPost) => {
@@ -31,9 +24,26 @@ export default function Write() {
     }
   })
 
+  if(!isLoaded) {
+    return <div className="">Loading...</div>
+  }
+
+  if(isLoaded && !isSignedIn) {
+    return <div className="">You should login!</div>
+  }
+
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault()
-    
+    const formData = new FormData(event.currentTarget)
+
+    const data = {
+      title: formData.get("title"),
+      category: formData.get("category"),
+      desc: formData.get("desc"),
+      content: value
+    }
+
+    console.log(data)
   }
 
   return (
@@ -49,7 +59,7 @@ export default function Write() {
         />
         <div className="flex items-center gap-4">
           <label htmlFor="" className="text-sm">Choose a category:</label>
-          <select name="cat" id="" className="p-2 rounded-xl bg-white shadow-md">
+          <select name="category" id="" className="p-2 rounded-xl bg-white shadow-md">
             <option value="general">General</option>
             <option value="web-design">Web Design</option>
             <option value="development">Development</option>
@@ -63,6 +73,8 @@ export default function Write() {
           <ReactQuill
             theme="snow"
             className="flex-1 rounded-xl bg-white shadow-md"
+            value={value}
+            onChange={setValue}
           />
         </Suspense>
         <button className="bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36">Send</button>
