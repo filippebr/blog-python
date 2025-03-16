@@ -2,6 +2,7 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { Suspense, useState } from "react"
+import { useNavigate } from "react-router"
 // import ReactQuill from "react-quill-new"
 // import 'react-quill-new/dist/quill.snow.css'
 
@@ -18,6 +19,9 @@ export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
+
+  const navigate = useNavigate()
+
   const { getToken } = useAuth()  
 
   const mutation = useMutation({
@@ -28,6 +32,9 @@ export default function Write() {
           Authorization: `Bearer ${token}`
         }
       })
+    },
+    onSuccess:(res) => {
+      navigate(`/${res.data.slug}`)
     }
   })
 
