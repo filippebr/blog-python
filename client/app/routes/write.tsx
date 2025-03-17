@@ -2,7 +2,8 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { Suspense, useState } from "react"
-import { useNavigate } from "react-router"
+// import { useNavigate } from "react-router"
+// import { toast } from 'react-toastify'
 // import ReactQuill from "react-quill-new"
 // import 'react-quill-new/dist/quill.snow.css'
 
@@ -20,7 +21,7 @@ export default function Write() {
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const { getToken } = useAuth()  
 
@@ -33,17 +34,20 @@ export default function Write() {
         }
       })
     },
-    onSuccess:(res) => {
-      navigate(`/${res.data.slug}`)
-    }
+    // onSuccess:(res) => {
+    //   console.log("Response:", res.data)
+    //   console.log("Slug:", res.data.slug)
+    //   toast.success("Post has been created")
+    //   navigate(`/${res.data.slug}`)
+    // },
   })
 
-  if(!isLoaded) {
-    return <div className="">Loading...</div>
+  if (!isLoaded) {
+    return <div className="">Loading...</div>;
   }
 
-  if(isLoaded && !isSignedIn) {
-    return <div className="">You should login!</div>
+  if (isLoaded && !isSignedIn) {
+    return <div className="">You should login!</div>;
   }
 
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -95,11 +99,12 @@ export default function Write() {
         </Suspense>
         <button
           disabled={mutation.isPending} 
-          className="bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36 disabled:bg-blue-400 disabled:cursor-not-allowed"
+          className="cursor-pointer bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36 disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
-          { mutation.isPending ? "Loading..." : "Send" }
+          {/* { mutation.isPending ? "Loading..." : "Send" } */}
+          Send
         </button>
-        {mutation.isError && <span>{mutation.error.message}</span>}
+        {/* {mutation.isError && <span>{mutation.error.message}</span>} */}
       </form>
     </div>
   )
