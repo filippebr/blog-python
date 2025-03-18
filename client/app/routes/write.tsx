@@ -2,7 +2,7 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { Suspense, useState } from "react"
-// import { useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 // import { toast } from 'react-toastify'
 // import ReactQuill from "react-quill-new"
 // import 'react-quill-new/dist/quill.snow.css'
@@ -21,25 +21,25 @@ export default function Write() {
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const { getToken } = useAuth()  
 
   const mutation = useMutation({
     mutationFn: async (newPost: PostData) => {
       const token = await getToken()
-      return axios.post(`${import.meta.env.VITE_API_URL}posts`, newPost, {
+      return axios.post(`${import.meta.env.VITE_API_URL}/posts`, newPost, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
     },
-    // onSuccess:(res) => {
-    //   console.log("Response:", res.data)
-    //   console.log("Slug:", res.data.slug)
-    //   toast.success("Post has been created")
-    //   navigate(`/${res.data.slug}`)
-    // },
+    onSuccess:(res) => {
+      console.log("Response:", res.data)
+      console.log("Slug:", res.data.slug)
+      // toast.success("Post has been created")
+      navigate(`/${res.data.slug}`)
+    },
   })
 
   if (!isLoaded) {
@@ -61,7 +61,7 @@ export default function Write() {
       content: value
     }
 
-    console.log(data)
+    // console.log(data)
 
     mutation.mutate(data)
   }
@@ -101,10 +101,10 @@ export default function Write() {
           disabled={mutation.isPending} 
           className="cursor-pointer bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36 disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
-          {/* { mutation.isPending ? "Loading..." : "Send" } */}
-          Send
+          { mutation.isPending ? "Loading..." : "Send" }
+          {/* Send */}
         </button>
-        {/* {mutation.isError && <span>{mutation.error.message}</span>} */}
+        {mutation.isError && <span>{mutation.error.message}</span>}
       </form>
     </div>
   )
