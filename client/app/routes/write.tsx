@@ -91,8 +91,8 @@ export default function Write() {
         <textarea name="desc" placeholder="A Short Description" className="p-4 rounded-xl bg-white shadow-md" />
         <div className="flex">
           <div className="flex flex-col gap-2 mr-2">
-            <div className="">📊</div>
-            <div className="">▶</div>
+            <div className="cursor-pointer">📊</div>
+            <div className="cursor-pointer">▶</div>
           </div>
           <Suspense fallback={<p>Loading editor...</p>}>
             <ReactQuill
