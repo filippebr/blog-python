@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import React, { Suspense, useState } from "react"
 import { useNavigate } from "react-router"
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 // import ReactQuill from "react-quill-new"
 // import 'react-quill-new/dist/quill.snow.css'
 
@@ -37,7 +37,7 @@ export default function Write() {
     onSuccess:(res) => {
       console.log("Response:", res.data)
       console.log("Slug:", res.data.slug)
-      // toast.success("Post has been created")
+      toast.success("Post has been created")
       navigate(`/posts/${res.data.slug}`)
     },
   })

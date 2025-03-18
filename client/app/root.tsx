@@ -16,8 +16,10 @@ import {
   QueryClientProvider
 } from '@tanstack/react-query'
 
+import { useEffect, useState } from "react"
 // import { ToastContainer } from 'react-toastify'
 // import 'react-toastify/dist/ReactToastify.css'
+import ToastWrapper from "~/components/toastwrapper"
 
 const queryClient = new QueryClient()
 
@@ -60,6 +62,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 export default function App({ loaderData }: Route.ComponentProps) {
+  const [isClient, setIsClient] = useState(false)
+
+  // Set isClient to true only after mounting on the client-side
+  useEffect(() => {
+    setIsClient(true);
+  }, [])
+  
   return (
     <ClerkProvider
       // loaderData={loaderData}
@@ -70,6 +79,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
       <QueryClientProvider client={queryClient}>
         <MainLayout />
         {/* <ToastContainer position="bottom-right"/> */}
+        <ToastWrapper />
       </QueryClientProvider>
     </ClerkProvider>
   );
