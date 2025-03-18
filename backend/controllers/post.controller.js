@@ -25,14 +25,17 @@ export const createPost = async (req, res) => {
       return res.status(404).json({ message: "User not found" })
     }
 
-    let slug = req.body.title.replace(/ /g, "-").toLowerCase()
-
-    let existingPost = await Post.findOne({ slug })
-
+    // Store the base slug separately
+    const baseSlug = req.body.title.replace(/ /g, "-").toLowerCase()
+    let slug = baseSlug
     let counter = 2
 
-    while(existingPost) {
-      slug = `${slug}-${counter}`
+    // Check if the slug already exists
+    let existingPost = await Post.findOne({ slug })
+
+    // If it exists, append a counter to the base slug until a unique one is found
+    while (existingPost) {
+      slug = `${baseSlug}-${counter}`
       existingPost = await Post.findOne({ slug })
       counter++
     }
@@ -44,11 +47,11 @@ export const createPost = async (req, res) => {
   } catch (error) {
     console.error("Error:", error)
     if (error.code === 11000) {
-      return res.status(400).json({ message: "Slug must be unique!" });
+      return res.status(400).json({ message: "Slug must be unique!" })
     }
     res.status(400).json({ message: error.message })
   }
-};
+}
 
 export const deletePost = async (req, res) => {
 
