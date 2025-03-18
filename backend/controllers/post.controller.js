@@ -75,7 +75,7 @@ export const deletePost = async (req, res) => {
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IK_URL_ENDPOINT,
   publicKey: process.env.IK_PUBLIC_KEY,
-  urlEndpoint: process.env.IK_PRIVATE_KEY
+  privateKey: process.env.IK_PRIVATE_KEY
 })
 
 export const uploadAuth = async(req, res) => {

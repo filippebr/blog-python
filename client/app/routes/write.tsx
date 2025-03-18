@@ -14,7 +14,37 @@ type PostData = {
   category: FormDataEntryValue | null;
   desc: FormDataEntryValue | null;
   content: string;
-};
+}
+
+const authenticator = async() => {
+  const reportError = ({message}: {message: string}) => {
+      
+  }
+
+  try {
+    
+
+    const response = await fetch('http://localhost:3000/auth')
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`Request failed with status ${response.status}: ${errorText}`)
+    }
+
+    const data = await response.json()
+    const { signature, expire, token } = data
+
+    return { signature, expire, token }
+
+
+  } catch (error) {
+    let message
+    if ( error instanceof Error ) message = error.message      
+    else message = String(error)
+    reportError({ message })
+    // throw new Error(`Authentication request failed: ${error.message}`)
+  }
+}
 
 export default function Write() {
 
