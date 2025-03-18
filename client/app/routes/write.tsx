@@ -89,14 +89,20 @@ export default function Write() {
           </select>
         </div>
         <textarea name="desc" placeholder="A Short Description" className="p-4 rounded-xl bg-white shadow-md" />
-        <Suspense fallback={<p>Loading editor...</p>}>
-          <ReactQuill
-            theme="snow"
-            className="flex-1 rounded-xl bg-white shadow-md"
-            value={value}
-            onChange={setValue}
-          />
-        </Suspense>
+        <div className="flex">
+          <div className="flex flex-col gap-2 mr-2">
+            <div className="">📊</div>
+            <div className="">▶</div>
+          </div>
+          <Suspense fallback={<p>Loading editor...</p>}>
+            <ReactQuill
+              theme="snow"
+              className="flex-1 rounded-xl bg-white shadow-md"
+              value={value}
+              onChange={setValue}
+            />
+          </Suspense>
+        </div>          
         <button
           disabled={mutation.isPending} 
           className="cursor-pointer bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36 disabled:bg-blue-400 disabled:cursor-not-allowed"
