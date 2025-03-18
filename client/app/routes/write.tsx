@@ -16,15 +16,18 @@ type PostData = {
   content: string;
 }
 
-const authenticator = async() => {
-  const reportError = ({message}: {message: string}) => {
-      
-  }
+interface AuthResponse {
+  signature: string;
+  expire: number;
+  token: string;
+}
 
-  try {
-    
+const authenticator = async(): Promise<AuthResponse> => {
+  try {    
 
-    const response = await fetch('http://localhost:3000/auth')
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/upload-auth`
+    )
 
     if (!response.ok) {
       const errorText = await response.text()
@@ -38,11 +41,12 @@ const authenticator = async() => {
 
 
   } catch (error) {
-    let message
-    if ( error instanceof Error ) message = error.message      
-    else message = String(error)
-    reportError({ message })
-    // throw new Error(`Authentication request failed: ${error.message}`)
+    // Type the error as unknown first, then narrow it down
+    if (error instanceof Error) {
+      throw new Error(`Authentication request failed: ${error.message}`)
+    }
+    // Handle cases where error might not be an Error instance
+    throw new Error(`Authentication request failed: Unknown error`)
   }
 }
 
@@ -101,6 +105,7 @@ export default function Write() {
       <h1 className="text-xl font-light">Create a New Post</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
         <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button>
+
         <input 
           className="text-4xl font-semibold bg-transparent outline-none" 
           type="text" 
