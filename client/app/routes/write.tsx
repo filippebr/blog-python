@@ -38,7 +38,7 @@ export default function Write() {
       console.log("Response:", res.data)
       console.log("Slug:", res.data.slug)
       // toast.success("Post has been created")
-      navigate(`/${res.data.slug}`)
+      navigate(`/posts/${res.data.slug}`)
     },
   })
 
