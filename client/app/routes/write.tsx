@@ -2,7 +2,7 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { IKContext, IKUpload } from "imagekitio-react"
-import React, { Suspense, useState } from "react"
+import React, { Suspense, useState, type SetStateAction } from "react"
 import { useNavigate } from "react-router"
 import { toast } from 'react-toastify'
 // import ReactQuill from "react-quill-new"
@@ -54,6 +54,7 @@ export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
+  const [cover, setCover] = useState('')
 
   const navigate = useNavigate()
 
@@ -105,8 +106,14 @@ export default function Write() {
     toast.error("Image upload failed!")
   }
 
-  const onSuccess = (res: Response) => {
+  const onSuccess = (res: SetStateAction<string>) => {
     console.log(res)
+    setCover(res)
+  }
+
+  const onUploadProgress = (progress: ProgressEvent) => {
+    console.log(progress)
+    // setCover(res)
   }
 
   return (
@@ -124,6 +131,7 @@ export default function Write() {
             useUniqueFileName
             onError={onError}
             onSuccess={onSuccess}
+            onUploadProgress={onUploadProgress}
           />
         </IKContext>
         <input 
