@@ -1,10 +1,10 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import { IKContext, IKUpload } from "imagekitio-react"
-import React, { Suspense, useState, type SetStateAction } from "react"
+import React, { Suspense, useState } from "react"
 import { useNavigate } from "react-router"
 import { toast } from 'react-toastify'
+import Upload from "~/components/upload"
 // import ReactQuill from "react-quill-new"
 // import 'react-quill-new/dist/quill.snow.css'
 
@@ -17,45 +17,13 @@ type PostData = {
   content: string;
 }
 
-interface AuthResponse {
-  signature: string;
-  expire: number;
-  token: string;
-}
-
-const authenticator = async(): Promise<AuthResponse> => {
-  try {    
-
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/posts/upload-auth`
-    )
-
-    if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`)
-    }
-
-    const data = await response.json()
-    const { signature, expire, token } = data
-
-    return { signature, expire, token }
-
-  } catch (error) {
-    // Type the error as unknown first, then narrow it down
-    if (error instanceof Error) {
-      throw new Error(`Authentication request failed: ${error.message}`)
-    }
-    // Handle cases where error might not be an Error instance
-    throw new Error(`Authentication request failed: Unknown error`)
-  }
-}
-
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
   const [cover, setCover] = useState('')
   const [progress, setProgress] = useState(0)
+
 
   const navigate = useNavigate()
 
@@ -96,45 +64,20 @@ export default function Write() {
       desc: formData.get("desc"),
       content: value
     }
-
     // console.log(data)
 
     mutation.mutate(data)
-  }
-
-  const onError = (err: Error) => {
-    console.log(err)
-    toast.error("Image upload failed!")
-  }
-
-  const onSuccess = (res: SetStateAction<string>) => {
-    console.log(res)
-    setCover(res)
-  }
-
-  const onUploadProgress = (progress: ProgressEvent) => {
-    console.log(progress)
-    setProgress(Math.round(progress.loaded / progress.total) * 100)
   }
 
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-xl font-light">Create a New Post</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
-        {/* <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button> */}
-        <IKContext
-          publicKey={import.meta.env.VITE_IMGKIT_PUBLIC_KEY}
-          urlEndpoint={import.meta.env.VITE_IMGKIT_URL_ENDPOINT}
-          authenticator={authenticator}
-        >
-          <IKUpload 
-            // fileName="test-upload.png"
-            useUniqueFileName
-            onError={onError}
-            onSuccess={onSuccess}
-            onUploadProgress={onUploadProgress}
-          />
-        </IKContext>
+        <Upload type="image" setProgress={setProgress} setData={setCover} >
+          {/* <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button> */}
+
+        </Upload>
+        
         <input 
           className="text-4xl font-semibold bg-transparent outline-none" 
           type="text" 
