@@ -1,6 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import { IKContext, IKUpload } from "imagekitio-react"
 import React, { Suspense, useState } from "react"
 import { useNavigate } from "react-router"
 import { toast } from 'react-toastify'
@@ -104,8 +105,18 @@ export default function Write() {
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-xl font-light">Create a New Post</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
-        <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button>
-
+        {/* <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button> */}
+        <IKContext
+          publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
+          urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
+          authenticator={authenticator}
+        >
+          <IKUpload 
+            fileName="test-upload.png"
+            // onError={onError}
+            // onSuccess={onSuccess}
+          />
+        </IKContext>
         <input 
           className="text-4xl font-semibold bg-transparent outline-none" 
           type="text" 
