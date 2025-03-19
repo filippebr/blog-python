@@ -40,7 +40,6 @@ const authenticator = async(): Promise<AuthResponse> => {
 
     return { signature, expire, token }
 
-
   } catch (error) {
     // Type the error as unknown first, then narrow it down
     if (error instanceof Error) {
@@ -101,6 +100,15 @@ export default function Write() {
     mutation.mutate(data)
   }
 
+  const onError = (err: Error) => {
+    console.log(err)
+    toast.error("Image upload failed!")
+  }
+
+  const onSuccess = (res: Response) => {
+    console.log(res)
+  }
+
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6">
       <h1 className="text-xl font-light">Create a New Post</h1>
@@ -112,9 +120,10 @@ export default function Write() {
           authenticator={authenticator}
         >
           <IKUpload 
-            fileName="test-upload.png"
-            // onError={onError}
-            // onSuccess={onSuccess}
+            // fileName="test-upload.png"
+            useUniqueFileName
+            onError={onError}
+            onSuccess={onSuccess}
           />
         </IKContext>
         <input 
