@@ -115,8 +115,8 @@ export default function Write() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
         {/* <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button> */}
         <IKContext
-          publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
-          urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
+          publicKey={import.meta.env.VITE_IMGKIT_PUBLIC_KEY}
+          urlEndpoint={import.meta.env.VITE_IMGKIT_URL_ENDPOINT}
           authenticator={authenticator}
         >
           <IKUpload 
