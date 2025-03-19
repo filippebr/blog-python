@@ -55,6 +55,7 @@ export default function Write() {
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
   const [cover, setCover] = useState('')
+  const [progress, setProgress] = useState(0)
 
   const navigate = useNavigate()
 
@@ -113,7 +114,7 @@ export default function Write() {
 
   const onUploadProgress = (progress: ProgressEvent) => {
     console.log(progress)
-    // setCover(res)
+    setProgress(Math.round(progress.loaded / progress.total) * 100)
   }
 
   return (
@@ -167,12 +168,13 @@ export default function Write() {
           </Suspense>
         </div>          
         <button
-          disabled={mutation.isPending} 
+          disabled={mutation.isPending || (progress > 0 && progress < 100)} 
           className="cursor-pointer bg-blue-800 text-white font-medium rounded-xl mt-4 p-2 w-36 disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
           { mutation.isPending ? "Loading..." : "Send" }
           {/* Send */}
         </button>
+        {"Progress: " + progress}
         {mutation.isError && <span>{mutation.error.message}</span>}
       </form>
     </div>
