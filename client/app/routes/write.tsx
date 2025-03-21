@@ -22,6 +22,8 @@ export default function Write() {
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
   const [cover, setCover] = useState('')
+  const [img, setImg] = useState('')
+  const [video, setVideo] = useState('')
   const [progress, setProgress] = useState(0)
 
   const navigate = useNavigate()
@@ -98,10 +100,10 @@ export default function Write() {
         <textarea name="desc" placeholder="A Short Description" className="p-4 rounded-xl bg-white shadow-md" />
         <div className="flex">
           <div className="flex flex-col gap-2 mr-2">
-            <Upload type="image" setProgress={setProgress} setData={setCover} >
+            <Upload type="image" setProgress={setProgress} setData={setImg} >
               📊
             </Upload>
-            <Upload type="image" setProgress={setProgress} setData={setCover} >
+            <Upload type="image" setProgress={setProgress} setData={setVideo} >
               ▶
             </Upload>
           </div>
