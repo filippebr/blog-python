@@ -21,13 +21,17 @@ interface Image {
   url: string;
 }
 
+interface Video {
+  url: string;
+}
+
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
   const [cover, setCover] = useState<string>('')
   const [img, setImg] = useState<string | Image>('')
-  const [video, setVideo] = useState<string>('')
+  const [video, setVideo] = useState<string | Video>('')
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
@@ -36,6 +40,12 @@ export default function Write() {
       setValue(prev => prev + `<p><image src="${(img as Image).url}" /></p>`);
     }
   }, [img])
+
+  useEffect(() => {
+    if (video) {
+      setValue(prev => prev + `<p><iframe class="ql-video" src="${(video as Video).url}" /></p>`);
+    }
+  }, [video])
 
   const navigate = useNavigate()
 
