@@ -1,7 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
-import React, { Suspense, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { toast } from 'react-toastify'
 import Upload from "~/components/upload"
@@ -17,14 +17,25 @@ type PostData = {
   content: string;
 }
 
+interface Image {
+  url: string;
+}
+
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
   const [cover, setCover] = useState('')
-  const [img, setImg] = useState('')
+  const [img, setImg] = useState<string | Image>('')
   const [video, setVideo] = useState('')
   const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    // Type guard to check if img is an Image object
+    if (img) {
+      setValue(prev => prev + `<p><image src="${(img as Image).url}" /></p>`);
+    }
+  }, [img])
 
   const navigate = useNavigate()
 

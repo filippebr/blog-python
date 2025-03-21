@@ -8,11 +8,11 @@ interface AuthResponse {
   token: string;
 }
 
-interface UploadProps {
+interface UploadProps<T> {
   children?: ReactNode;
   type: string;
   setProgress: Dispatch<SetStateAction<number>>;
-  setData: Dispatch<SetStateAction<string>>;
+  setData: React.Dispatch<React.SetStateAction<T>>;
 }
 
 const authenticator = async(): Promise<AuthResponse> => {
@@ -42,7 +42,7 @@ const authenticator = async(): Promise<AuthResponse> => {
   }
 }
 
-export default function Upload({ children, type, setProgress, setData }: UploadProps) {  
+export default function Upload<T,>({ children, type, setProgress, setData }: UploadProps<T>) {  
 
   const ref = useRef<HTMLInputElement | null>(null)
 
@@ -51,7 +51,7 @@ export default function Upload({ children, type, setProgress, setData }: UploadP
     toast.error("Image upload failed!")
   }
 
-  const onSuccess = (res: string) => {
+  const onSuccess = (res: T) => {
     console.log(res)
     setData(res)
   }
