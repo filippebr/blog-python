@@ -25,9 +25,9 @@ export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
-  const [cover, setCover] = useState('')
+  const [cover, setCover] = useState<string>('')
   const [img, setImg] = useState<string | Image>('')
-  const [video, setVideo] = useState('')
+  const [video, setVideo] = useState<string>('')
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
