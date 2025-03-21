@@ -124,7 +124,7 @@ export default function Write() {
             <Upload type="image" setProgress={setProgress} setData={setImg} >
               📊
             </Upload>
-            <Upload type="image" setProgress={setProgress} setData={setVideo} >
+            <Upload type="video" setProgress={setProgress} setData={setVideo} >
               ▶
             </Upload>
           </div>
@@ -134,6 +134,7 @@ export default function Write() {
               className="flex-1 rounded-xl bg-white shadow-md"
               value={value}
               onChange={setValue}
+              readOnly={progress > 0 && progress < 100}
             />
           </Suspense>
         </div>          
