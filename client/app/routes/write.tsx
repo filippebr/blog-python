@@ -98,7 +98,7 @@ export default function Write() {
           </select>
         </div>
         <textarea name="desc" placeholder="A Short Description" className="p-4 rounded-xl bg-white shadow-md" />
-        <div className="flex">
+        <div className="flex flex-1">
           <div className="flex flex-col gap-2 mr-2">
             <Upload type="image" setProgress={setProgress} setData={setImg} >
               📊
