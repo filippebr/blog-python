@@ -24,7 +24,6 @@ export default function Write() {
   const [cover, setCover] = useState('')
   const [progress, setProgress] = useState(0)
 
-
   const navigate = useNavigate()
 
   const { getToken } = useAuth()  
@@ -74,8 +73,9 @@ export default function Write() {
       <h1 className="text-xl font-light">Create a New Post</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1 mb-6">
         <Upload type="image" setProgress={setProgress} setData={setCover} >
-          {/* <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">Add a cover image</button> */}
-
+          <button className="cursor-pointer w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">
+            Add a cover image
+          </button>
         </Upload>
         
         <input 
@@ -98,8 +98,12 @@ export default function Write() {
         <textarea name="desc" placeholder="A Short Description" className="p-4 rounded-xl bg-white shadow-md" />
         <div className="flex">
           <div className="flex flex-col gap-2 mr-2">
-            <div className="cursor-pointer">📊</div>
-            <div className="cursor-pointer">▶</div>
+            <Upload type="image" setProgress={setProgress} setData={setCover} >
+              📊
+            </Upload>
+            <Upload type="image" setProgress={setProgress} setData={setCover} >
+              ▶
+            </Upload>
           </div>
           <Suspense fallback={<p>Loading editor...</p>}>
             <ReactQuill
