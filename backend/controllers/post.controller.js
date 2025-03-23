@@ -2,10 +2,10 @@ import ImageKit from "imagekit"
 import Post from "../models/post.model.js"
 import User from "../models/user.model.js"
 
-export const getPosts = async (req, res, next) => {
+export const getPosts = async (req, res) => {
 
   const page = parseInt(req.query.page) || 1
-  const limit = parseInt(req.query.limit) || 5
+  const limit = parseInt(req.query.limit) || 2
 
   const posts = await Post.find()
     .limit(limit)
