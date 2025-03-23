@@ -1,22 +1,34 @@
-import { useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import axios from "axios"
 import PostListItem from "./postlistitem"
 
-const fetchPosts = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}posts`)
+const fetchPosts = async (pageParam: number) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}posts`, {
+    params: { page: pageParam}
+  })
   
   return res.data
 }
 
 export default function PostList() {
-  const { isPending, error, data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () => fetchPosts(),
+  const {
+    data,
+    error, 
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status
+  } = useInfiniteQuery({
+    queryKey: ["posts"],
+    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
   })
 
-  if (isPending) return 'Loading...'
+  if (status === "pending") return 'Loading...'
 
-  if (error) return 'An error has occurred: ' + error.message
+  if (status === "error") return "Something went wrong!"
 
   console.log(data)
 
