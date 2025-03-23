@@ -29,6 +29,8 @@ export default function PostList() {
 
   console.log(data)
 
+  const allPosts = data?.pages?.flatMap(page => page.posts) || [] 
+
   if (status === "pending") return 'Loading...'
 
   if (status === "error") return "Something went wrong!"
@@ -37,6 +39,10 @@ export default function PostList() {
 
   return (
     <div className="flex flex-col gap-12 mb-8">
+      {allPosts.map(post => (
+        <PostListItem key={post._id} post={post} />
+      ))}
+      {/* <PostListItem />
       <PostListItem />
       <PostListItem />
       <PostListItem />
@@ -46,8 +52,7 @@ export default function PostList() {
       <PostListItem />
       <PostListItem />
       <PostListItem />
-      <PostListItem />
-      <PostListItem />
+      <PostListItem /> */}
     </div>
   )
 }
