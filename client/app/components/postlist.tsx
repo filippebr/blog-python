@@ -22,15 +22,17 @@ export default function PostList() {
   } = useInfiniteQuery({
     queryKey: ["posts"],
     queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => 
+      lastPage.hasMore ? pages.length + 1 : undefined,
   })
+
+  console.log(data)
 
   if (status === "pending") return 'Loading...'
 
   if (status === "error") return "Something went wrong!"
 
-  console.log(data)
 
   return (
     <div className="flex flex-col gap-12 mb-8">
