@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query"
 import axios from "axios"
+import InfiniteScroll from "react-infinite-scroll-component"
 import PostListItem from "./postlistitem"
 
 const fetchPosts = async (pageParam: number) => {
@@ -38,21 +39,20 @@ export default function PostList() {
   console.log(data)
 
   return (
-    <div className="flex flex-col gap-12 mb-8">
+    <InfiniteScroll
+      dataLength={allPosts.length} //This is important field to render the next data
+      next={fetchNextPage}
+      hasMore={!!hasNextPage}
+      loader={<h4>Loading more posts...</h4>}
+      endMessage={
+        <p style={{ textAlign: 'center' }}>
+          <b>All posts loaded!</b>
+        </p>
+      }      
+    >
       {allPosts.map(post => (
         <PostListItem key={post._id} post={post} />
       ))}
-      {/* <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem />
-      <PostListItem /> */}
-    </div>
+    </InfiniteScroll>
   )
 }
