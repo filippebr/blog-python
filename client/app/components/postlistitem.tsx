@@ -2,15 +2,16 @@ import { Link } from "react-router"
 import Image from "./image"
 
 interface Post {
-  _id: string; // Used in key prop in PostList
-  img?: string; // Optional: for the Image src, if it comes from the post
-  title: string; // Used in the Link
-  user: string; // Used in "Written by"
-  category: string; // Used in the category Link
-  date: string; // Used in "2 days ago"
-  desc: string; // Used in the <p> tag
+  _id: string; 
+  img?: string; 
+  title: string; 
+  slug: string;
+  user: string; 
+  category: string; 
+  date: string;  
+  desc?: string;  
   content: string;
-  isfeature: boolean;
+  isFeature: boolean;
   visit: number;
 }
 
@@ -43,8 +44,7 @@ export default function PostListItem({ post }: PostListItemProps) {
           ipsam? A sit enim nemo dicta.
         </p>
         <Link to="/test" className="underline text-blue-800 text-sm">Read More</Link>
-      </div>
-      
+      </div>      
     </div>
   )
 }
