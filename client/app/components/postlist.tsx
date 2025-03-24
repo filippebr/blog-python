@@ -4,7 +4,7 @@ import PostListItem from "./postlistitem"
 
 const fetchPosts = async (pageParam: number) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { page: pageParam}
+    params: { page: pageParam, limit: 2 }
   })
   
   return res.data

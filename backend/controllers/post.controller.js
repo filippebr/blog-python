@@ -9,7 +9,7 @@ export const getPosts = async (req, res) => {
 
   const posts = await Post.find()
     .limit(limit)
-    .skip((page - 1) * 5)
+    .skip((page - 1) * limit)
 
   const totalPosts = await Post.countDocuments()
   const hasMore = page * limit < totalPosts
