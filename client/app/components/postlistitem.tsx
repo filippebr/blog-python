@@ -21,15 +21,15 @@ interface PostListItemProps {
 
 export default function PostListItem({ post }: PostListItemProps) {
   return (
-    <div className="flex flex-col xl:flex-row gap-8 mb-8">
+    <div className="flex flex-col xl:flex-row gap-8 mb-12">
       {/* image */}
-      <div className="md:hidden xl:block xl:w-1/3">
-        <Image src="postImg.jpeg" alt="post image" className="rounded-2xl object-cover" w="735" />
-      </div>
+      {post.img && <div className="md:hidden xl:block xl:w-1/3">
+        <Image src={post.img} alt="post image" className="rounded-2xl object-cover" w="735" />
+      </div>}
       {/* details */}
       <div className="flex flex-col gap-4 xl:w-2/3">
         <Link to="/test" className="text-4xl font-semibold">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis vero quia, illum dolorem.
+          {post.title}
         </Link>
         <div className="flex items-center gap-2 text-gray-400 text-sm">
           <span>Written by</span>
@@ -39,11 +39,9 @@ export default function PostListItem({ post }: PostListItemProps) {
           <span>2 days ago</span>
         </div>  
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eaque tempora quam voluptate? 
-          Iste numquam voluptates veritatis molestiae officiis fugiat optio laudantium assumenda consectetur 
-          ipsam? A sit enim nemo dicta.
+          {post.desc}
         </p>
-        <Link to="/test" className="underline text-blue-800 text-sm">Read More</Link>
+        <Link to={`/${post.slug}`} className="underline text-blue-800 text-sm">Read More</Link>
       </div>      
     </div>
   )
