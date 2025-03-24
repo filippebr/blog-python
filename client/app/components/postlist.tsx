@@ -40,7 +40,7 @@ export default function PostList() {
 
   return (
     <InfiniteScroll
-      dataLength={allPosts.length} //This is important field to render the next data
+      dataLength={allPosts.length}
       next={fetchNextPage}
       hasMore={!!hasNextPage}
       loader={<h4>Loading more posts...</h4>}
@@ -48,7 +48,7 @@ export default function PostList() {
         <p style={{ textAlign: 'center' }}>
           <b>All posts loaded!</b>
         </p>
-      }      
+      } 
     >
       {allPosts.map(post => (
         <PostListItem key={post._id} post={post} />
