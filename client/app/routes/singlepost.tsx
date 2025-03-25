@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { Link, useParams } from "react-router"
+import { format } from "timeago.js"
 import Comments from "~/components/comments"
 import Image from "~/components/image"
 import PostMenuActions from "~/components/postmenuactions"
@@ -34,24 +35,22 @@ export default function SinglePost() {
       <div className="flex gap-8">
         <div className="lg:w-3/5 flex flex-col gap-8">
           <h1 className="text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet porro vitae consequuntur.
+            {data.title}
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Written by</span>
-            <Link to="" className="text-blue-800">John Doe</Link>
+            <Link to="" className="text-blue-800">{data.user.username}</Link>
             <span>on</span>
-            <Link to="" className="text-blue-800">Web Design</Link>
-            <span>2 days ago</span>
+            <Link to="" className="text-blue-800">{data.category}</Link>
+            <span>{format(data.createdAt)}</span>
           </div>     
           <p className="text-gray-500 font-medium ">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi quaerat quam minima 
-            quos voluptatem laboriosam iusto illo quasi quisquam, similique deleniti nobis, 
-            iste perspiciatis voluptas assumenda beatae? Minima, a temporibus.  
+            {data.desc} 
           </p>     
         </div>
-        <div className="hidden lg:block w-2/5">
-          <Image src="postImg.jpeg" alt="single post" w="600" className="rounded-2xl" />
-        </div>
+        {data.img && <div className="hidden lg:block w-2/5">
+          <Image src={data.img} alt="single post" w="600" className="rounded-2xl" />
+        </div>}
         <div className=""></div>
       </div>
       {/* content */}
@@ -141,17 +140,19 @@ export default function SinglePost() {
           <h1 className="mb-4 text-sm font-medium">Author</h1>
           <div className="flex flex-col gap-4">          
             <div className="flex items-center gap-8 ">
-              <Image 
-                src="userImg.jpeg" 
+              {data.user.img && <Image 
+                src={data.user.img} 
                 alt="author image menu" 
                 className="w-12 h-12 rounded-full object-cover" 
                 w="48" 
                 h="48" 
-              />
-              <Link to="" className="text-blue-800">John Doe</Link>
+              />}
+              <Link to="" className="text-blue-800">{data.user.username}</Link>
             </div>
-            <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur. Iste odit voluptas eaque sunt optio eius iure sed doloremque harum.</p>
-            <div className="flex gap-2 ">
+            <p className="text-sm text-gray-500">
+              Lorem ipsum dolor sit amet consectetur. Iste odit voluptas eaque sunt optio eius iure sed doloremque harum.
+            </p>
+            <div className="flex gap-2">
               <Link to="">
                 <Image src="facebook.svg" alt="facebook"/>
               </Link>
