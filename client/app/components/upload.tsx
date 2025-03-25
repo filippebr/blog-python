@@ -1,5 +1,5 @@
 import { IKContext, IKUpload } from "imagekitio-react"
-import { useRef, type Dispatch, type ReactNode, type SetStateAction } from "react"
+import { useRef, type Dispatch, type SetStateAction } from "react"
 import { toast } from "react-toastify"
 
 interface AuthResponse {
@@ -9,7 +9,7 @@ interface AuthResponse {
 }
 
 interface UploadProps<T> {
-  children?: ReactNode;
+  children?: React.ReactNode;
   type: string;
   setProgress: Dispatch<SetStateAction<number>>;
   setData: React.Dispatch<React.SetStateAction<T>>;

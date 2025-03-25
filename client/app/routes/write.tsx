@@ -11,25 +11,30 @@ import Upload from "~/components/upload"
 const ReactQuill = React.lazy(() => import('react-quill-new'))
 
 type PostData = {
-  title: FormDataEntryValue | null;
-  category: FormDataEntryValue | null;
-  desc: FormDataEntryValue | null;
-  content: string;
+  img: FormDataEntryValue | null
+  title: FormDataEntryValue | null
+  category: FormDataEntryValue | null
+  desc: FormDataEntryValue | null
+  content: string
 }
 
 interface Image {
-  url: string;
+  url: string
 }
 
 interface Video {
-  url: string;
+  url: string
+}
+
+interface CoverImage {
+  filePath: string;
 }
 
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
-  const [cover, setCover] = useState<string>('')
+  const [cover, setCover] = useState<CoverImage | string>('')
   const [img, setImg] = useState<string | Image>('')
   const [video, setVideo] = useState<string | Video>('')
   const [progress, setProgress] = useState(0)
@@ -81,6 +86,7 @@ export default function Write() {
     const formData = new FormData(event.currentTarget)
 
     const data = {
+      img: cover && typeof cover !== 'string' ? cover.filePath : cover || "",
       title: formData.get("title"),
       category: formData.get("category"),
       desc: formData.get("desc"),
