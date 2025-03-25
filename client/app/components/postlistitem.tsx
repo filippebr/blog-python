@@ -7,7 +7,9 @@ interface Post {
   img?: string 
   title: string 
   slug: string
-  user: string 
+  user: {
+    username: string
+  } 
   category: string 
   date: string  
   desc?: string  
@@ -36,9 +38,9 @@ export default function PostListItem({ post }: PostListItemProps) {
         </Link>
         <div className="flex items-center gap-2 text-gray-400 text-sm">
           <span>Written by</span>
-          <Link to="" className="text-blue-800">John Doe</Link>
+          <Link to="" className="text-blue-800">{post.user.username}</Link>
           <span>on</span>
-          <Link to="" className="text-blue-800">Web Design</Link>
+          <Link to="" className="text-blue-800">{post.category}</Link>
           <span>{format(post.createdAt)}</span>
         </div>  
         <p>
