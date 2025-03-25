@@ -1,22 +1,25 @@
 import { Link } from "react-router"
+import { format } from "timeago.js"
 import Image from "./image"
 
 interface Post {
-  _id: string; 
-  img?: string; 
-  title: string; 
-  slug: string;
-  user: string; 
-  category: string; 
-  date: string;  
-  desc?: string;  
-  content: string;
-  isFeature: boolean;
-  visit: number;
+  _id: string 
+  img?: string 
+  title: string 
+  slug: string
+  user: string 
+  category: string 
+  date: string  
+  desc?: string  
+  content: string
+  isFeature: boolean
+  visit: number
+  createdAt: Date
+  updatedAt: Date
 }
 
 interface PostListItemProps {
-  post: Post;
+  post: Post
 }
 
 export default function PostListItem({ post }: PostListItemProps) {
@@ -36,7 +39,7 @@ export default function PostListItem({ post }: PostListItemProps) {
           <Link to="" className="text-blue-800">John Doe</Link>
           <span>on</span>
           <Link to="" className="text-blue-800">Web Design</Link>
-          <span>2 days ago</span>
+          <span>{format(post.createdAt)}</span>
         </div>  
         <p>
           {post.desc}
