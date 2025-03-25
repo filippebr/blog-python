@@ -1,4 +1,6 @@
-import { Link } from "react-router"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import { Link, useParams } from "react-router"
 import { format } from "timeago.js"
 import Image from "./image"
 
@@ -24,7 +26,25 @@ interface PostListItemProps {
   post: Post
 }
 
+const fetchPost = async(slug: string) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`)
+  return res.data
+} 
+
 export default function PostListItem({ post }: PostListItemProps) {
+
+  const { slug } = useParams<{ slug: string | undefined }>()
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["post", slug],
+    queryFn: () => {
+      if (!slug) {
+        throw new Error("Slug is undefined"); // or handle it differently
+      }
+      return fetchPost(slug); // TypeScript knows slug is string here
+    },
+  }) 
+
   return (
     <div className="flex flex-col xl:flex-row gap-8 mb-12">
       {/* image */}
