@@ -1,10 +1,33 @@
-import { Link } from "react-router"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import { Link, useParams } from "react-router"
 import Comments from "~/components/comments"
 import Image from "~/components/image"
 import PostMenuActions from "~/components/postmenuactions"
 import Search from "~/components/search"
 
+const fetchPost = async(slug: string) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`)
+  return res.data
+} 
+
 export default function SinglePost() {
+  const { slug } = useParams<{ slug: string | undefined }>()
+  
+  const { isPending, error, data } = useQuery({
+    queryKey: ["post", slug],
+    queryFn: () => {
+      if (!slug) {
+        throw new Error("Slug is undefined"); // or handle it differently
+      }
+      return fetchPost(slug); // TypeScript knows slug is string here
+    },
+  }) 
+
+  if (isPending) return "Loading..."
+  if (error ) return "Something went wrong!" + error.message
+  if (!data) return "Posts not found!"
+
   return (
     <div className="flex flex-col gap-8">
       {/* detail */}
