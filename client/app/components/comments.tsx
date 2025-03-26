@@ -1,8 +1,6 @@
 import { useAuth } from "@clerk/clerk-react"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
-import { useNavigate } from "react-router"
-import { toast } from "react-toastify"
 import Comment from "./comment"
 
 interface Comment {
@@ -35,8 +33,8 @@ export default function Comments({ postId }: CommentProps) {
     queryFn: () => fetchComments(postId)
   }) 
 
-  const navigate = useNavigate()
-
+  const queryClient = useQueryClient()
+  
   const mutation = useMutation({
     mutationFn: async (newComment: CommentProps) => {
       const token = await getToken()
@@ -46,11 +44,10 @@ export default function Comments({ postId }: CommentProps) {
         }
       })
     },
-    onSuccess:(res) => {
-      // console.log("Response:", res.data)
-      // console.log("Slug:", res.data.slug)
-      toast.success("Post has been created")
-      navigate(`/posts/${res.data.slug}`)
+    onSuccess:() => {
+      queryClient.invalidateQueries({
+        queryKey: ["comments", postId]
+      })
     },
   })
 
