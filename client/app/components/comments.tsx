@@ -1,6 +1,27 @@
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 import Comment from "./comment"
 
-export default function Comments() {
+interface CommentProps {
+  postId: string
+}
+
+const fetchComments = async(postId: string) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`)
+  return res.data
+} 
+
+export default function Comments({ postId }: CommentProps) {
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["comments", postId],
+    queryFn: () => fetchComments(postId)
+  }) 
+
+  if (isPending) return "Loading..."
+  if (error ) return "Something went wrong!" + error.message
+  if (!data) return "Comments not found!"
+
   return (
     <div className="flex flex-col gap-8 lg:w-3/5">
       <h1 className="text-xl text-gray-500 underline">Comments</h1>
