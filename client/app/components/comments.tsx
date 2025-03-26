@@ -1,6 +1,7 @@
 import { useAuth } from "@clerk/clerk-react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
+import { toast } from "react-toastify"
 import Comment from "./comment"
 
 interface Comment {
@@ -49,6 +50,13 @@ export default function Comments({ postId }: CommentProps) {
         queryKey: ["comments", postId]
       })
     },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.description)
+      } else {
+        toast.error('something goest wrong with axios')
+      }
+    }
   })
 
   if (isPending) return "Loading..."
