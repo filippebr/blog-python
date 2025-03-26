@@ -2,6 +2,18 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Comment from "./comment"
 
+interface Comment {
+  _id: string;
+  user: {
+    _id: string;
+    username?: string;
+  };
+  post: string;
+  desc: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface CommentProps {
   postId: string
 }
@@ -13,7 +25,7 @@ const fetchComments = async(postId: string) => {
 
 export default function Comments({ postId }: CommentProps) {
 
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data } = useQuery<Comment[]>({
     queryKey: ["comments", postId],
     queryFn: () => fetchComments(postId)
   }) 
@@ -29,14 +41,9 @@ export default function Comments({ postId }: CommentProps) {
         <textarea placeholder="Write a comment..." className="w-full p-4 rounded-xl" />
         <button className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">Send</button>
       </div>
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
-      <Comment />
+      {data.map((comment) => 
+        <Comment key={comment._id} comment={comment} />
+      )}
     </div>
   )
 }

@@ -1,6 +1,21 @@
 import Image from "./image"
 
-export default function Comment() {
+// comment.tsx
+interface CommentProps {
+  comment: {
+    _id: string;
+    user: {
+      _id: string;
+      username?: string;
+    };
+    post: string;
+    desc: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
+export default function Comment({ comment }: CommentProps) {
   return (
     <div className="p-4 bg-slate-50 rounded-xl mb-8">
       <div className="flex items-center gap-4">
