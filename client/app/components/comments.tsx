@@ -1,5 +1,8 @@
-import { useQuery } from "@tanstack/react-query"
+import { useAuth } from "@clerk/clerk-react"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { useNavigate } from "react-router"
+import { toast } from "react-toastify"
 import Comment from "./comment"
 
 interface Comment {
@@ -25,10 +28,31 @@ const fetchComments = async(postId: string) => {
 
 export default function Comments({ postId }: CommentProps) {
 
+  const { getToken } = useAuth() 
+
   const { isPending, error, data } = useQuery<Comment[]>({
     queryKey: ["comments", postId],
     queryFn: () => fetchComments(postId)
   }) 
+
+  const navigate = useNavigate()
+
+  const mutation = useMutation({
+    mutationFn: async (newComment: CommentProps) => {
+      const token = await getToken()
+      return axios.post(`${import.meta.env.VITE_API_URL}/comments`, newComment, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    },
+    onSuccess:(res) => {
+      // console.log("Response:", res.data)
+      // console.log("Slug:", res.data.slug)
+      toast.success("Post has been created")
+      navigate(`/posts/${res.data.slug}`)
+    },
+  })
 
   if (isPending) return "Loading..."
   if (error ) return "Something went wrong!" + error.message

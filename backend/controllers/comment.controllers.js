@@ -45,5 +45,9 @@ export const deleteComment = async(req, res) => {
     user: user._id
   })
 
-  
+  if(!deletedComment) {
+    return res.status(403).json("You can delete only your comment!")
+  }
+
+  res.status(200).json("Comment deleted")
 }
