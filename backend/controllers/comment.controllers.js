@@ -1,4 +1,5 @@
 import Comment from "../models/comment.model.js"
+import User from "../models/user.model.js"
 
 export const getPostComments = async(req, res) => {
   const comments = await Comment.find({post: req.params.postId})
@@ -9,7 +10,14 @@ export const getPostComments = async(req, res) => {
 }
 
 export const addComment = async(req, res) => {
+  const clerkUserId = req.auth.userId
+  const postId = req.params.postId
 
+  if (!clerkUserId) {
+    return res.status(401).json("Not authenticated!")
+  }
+
+  const user = User.findOne({clerkUserId})
 }
 
 export const deleteComment = async(req, res) => {

@@ -32,7 +32,6 @@ export default function Comments({ postId }: CommentProps) {
 
   if (isPending) return "Loading..."
   if (error ) return "Something went wrong!" + error.message
-  if (!data) return "Comments not found!"
 
   return (
     <div className="flex flex-col gap-8 lg:w-3/5">
