@@ -18,6 +18,16 @@ export const addComment = async(req, res) => {
   }
 
   const user = User.findOne({clerkUserId})
+
+  const newComment = new Comment({
+    ...req.body, 
+    user:user._id, 
+    post: postId
+  })
+
+  const savedComment = await newComment.save()
+
+  res.status(201).json(savedComment)
 }
 
 export const deleteComment = async(req, res) => {
