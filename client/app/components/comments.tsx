@@ -80,7 +80,7 @@ export default function Comments({ postId }: CommentProps) {
       <h1 className="text-xl text-gray-500 underline">Comments</h1>
       <form onSubmit={handleSubmit} className="flex items-center justify-between gap-8 w-full">
         <textarea placeholder="Write a comment..." className="w-full p-4 rounded-xl" />
-        <button className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">Send</button>
+        <button className="cursor-pointer bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">Send</button>
       </form>
       {data.map((comment) => 
         <Comment key={comment._id} comment={comment} />
