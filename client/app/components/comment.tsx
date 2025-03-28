@@ -30,7 +30,7 @@ export default function Comment({ comment }: CommentProps) {
           />
         )}
         <span className="font-medium">{comment.user.username}</span>
-        <span className="text-sm text-gray-500">{format(comment.createdAt())}</span>
+        <span className="text-sm text-gray-500">{format(comment.createdAt)}</span>
       </div> 
       <div className="mt-4">
         <p>
