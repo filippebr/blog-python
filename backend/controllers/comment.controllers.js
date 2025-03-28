@@ -10,24 +10,31 @@ export const getPostComments = async(req, res) => {
 }
 
 export const addComment = async(req, res) => {
-  const clerkUserId = req.auth.userId
-  const postId = req.params.postId
+  try {
+    const clerkUserId = req.auth.userId
+    const postId = req.params.postId
 
-  if (!clerkUserId) {
-    return res.status(401).json("Not authenticated!")
+    if (!clerkUserId) {
+      return res.status(401).json({ description: "Not authenticated!" })
+    }
+
+    const user = await User.findOne({ clerkUserId })
+    if (!user) {
+      return res.status(404).json({ description: "User not found" })
+    }
+
+    const { desc } = req.body
+    const newComment = new Comment({
+      desc,
+      user: user._id,
+      post: postId
+    })
+
+    const savedComment = await newComment.save()
+    res.status(201).json(savedComment)
+  } catch (error) {
+    res.status(500).json({ description: error.message })
   }
-
-  const user = await User.findOne({clerkUserId})
-
-  const newComment = new Comment({
-    ...req.body, 
-    user:user._id, 
-    post: postId
-  })
-
-  const savedComment = await newComment.save()
-
-  res.status(201).json(savedComment)
 }
 
 export const deleteComment = async(req, res) => {
