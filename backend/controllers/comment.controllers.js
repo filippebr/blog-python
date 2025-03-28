@@ -17,7 +17,7 @@ export const addComment = async(req, res) => {
     return res.status(401).json("Not authenticated!")
   }
 
-  const user = User.findOne({clerkUserId})
+  const user = await User.findOne({clerkUserId})
 
   const newComment = new Comment({
     ...req.body, 

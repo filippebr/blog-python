@@ -72,6 +72,8 @@ export default function Comments({ postId }: CommentProps) {
       desc: formData.get("desc")?.toString() ?? "",
     }
 
+    console.log(data)
+
     mutation.mutate(data)
   }
 
