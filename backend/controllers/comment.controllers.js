@@ -24,6 +24,11 @@ export const addComment = async(req, res) => {
     }
 
     const { desc } = req.body
+
+    if (!desc || desc.trim() === "") {
+      return res.status(400).json({ description: "Comment description cannot be empty" })
+    }
+
     const newComment = new Comment({
       desc,
       user: user._id,
