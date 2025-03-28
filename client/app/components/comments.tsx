@@ -18,6 +18,7 @@ interface Comment {
 
 interface CommentProps {
   postId: string
+  desc: string
 }
 
 const fetchComments = async(postId: string) => {
@@ -61,6 +62,18 @@ export default function Comments({ postId }: CommentProps) {
 
   if (isPending) return "Loading..."
   if (error ) return "Something went wrong!" + error.message
+
+  function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+
+    const data: CommentProps = {
+      postId: formData.get("postId")?.toString() ?? "",
+      desc: formData.get("desc")?.toString() ?? "",
+    }
+
+    mutation.mutate(data)
+  }
 
   return (
     <div className="flex flex-col gap-8 lg:w-3/5">
