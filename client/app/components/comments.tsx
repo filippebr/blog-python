@@ -1,19 +1,20 @@
-import { useAuth } from "@clerk/clerk-react"
+import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { toast } from "react-toastify"
 import Comment from "./comment"
 
 interface Comment {
-  _id: string;
+  _id: string
   user: {
-    _id: string;
-    username?: string;
+    _id: string
+    username?: string | undefined
+    img?: string
   };
-  post: string;
-  desc: string;
-  createdAt: string;
-  updatedAt: string;
+  post: string
+  desc: string
+  createdAt: string
+  updatedAt: string
 }
 
 interface CommentProps {
@@ -27,7 +28,7 @@ const fetchComments = async(postId: string) => {
 } 
 
 export default function Comments({ postId }: CommentProps) {
-
+  const {user} = useUser()
   const { getToken } = useAuth() 
 
   const { isPending, error, data } = useQuery<Comment[]>({
@@ -60,9 +61,6 @@ export default function Comments({ postId }: CommentProps) {
     }
   })
 
-  if (isPending) return "Loading..."
-  if (error ) return "Something went wrong!" + error.message
-
   function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
@@ -71,8 +69,6 @@ export default function Comments({ postId }: CommentProps) {
       postId,
       desc: formData.get("desc")?.toString() || "",
     }
-
-    console.log("Sending data:", data)
 
     mutation.mutate(data)
   }
@@ -88,9 +84,33 @@ export default function Comments({ postId }: CommentProps) {
         />
         <button className="cursor-pointer bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">Send</button>
       </form>
-      {data.map((comment) => 
-        <Comment key={comment._id} comment={comment} />
-      )}
+      {isPending 
+        ? "Loading..." 
+        : error 
+        ? "Error loading" 
+        : 
+      <>
+      {
+        mutation.isPending && (
+          <Comment comment={{
+            _id: "temp_id",
+            post: postId,
+            desc: `${mutation.variables.desc} (Sending...)`,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            user: {
+              _id: user?.id || "temp-user-id",
+              img: user?.imageUrl,
+              username: user?.username ?? undefined,
+            }
+          }}/>
+        )
+      }
+        {data.map((comment) => 
+          <Comment key={comment._id} comment={comment} />
+        )}
+      </>  
+      }
     </div>
   )
 }
