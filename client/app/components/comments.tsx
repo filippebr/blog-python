@@ -40,7 +40,7 @@ export default function Comments({ postId }: CommentProps) {
   const mutation = useMutation({
     mutationFn: async (newComment: CommentProps) => {
       const token = await getToken()
-      return axios.post(`${import.meta.env.VITE_API_URL}/comments`, newComment, {
+      return axios.post(`${import.meta.env.VITE_API_URL}/comments/${postId}`, newComment, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -76,12 +76,12 @@ export default function Comments({ postId }: CommentProps) {
   }
 
   return (
-    <div className="flex flex-col gap-8 lg:w-3/5">
+    <div className="flex flex-col gap-8 lg:w-3/5 mb-12">
       <h1 className="text-xl text-gray-500 underline">Comments</h1>
-      <div className="flex items-center justify-between gap-8 w-full">
+      <form onSubmit={handleSubmit} className="flex items-center justify-between gap-8 w-full">
         <textarea placeholder="Write a comment..." className="w-full p-4 rounded-xl" />
         <button className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">Send</button>
-      </div>
+      </form>
       {data.map((comment) => 
         <Comment key={comment._id} comment={comment} />
       )}
