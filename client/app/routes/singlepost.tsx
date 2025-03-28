@@ -100,7 +100,7 @@ export default function SinglePost() {
           <Search />
         </div>
       </div>
-      <Comments postId={data._id} />
+      <Comments postId={data._id} desc={data.desc} />
     </div>
   )
 }
