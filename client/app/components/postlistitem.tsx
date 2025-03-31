@@ -1,28 +1,7 @@
 import { Link } from "react-router"
 import { format } from "timeago.js"
+import type { PostListItemProps } from "~/types/post"
 import Image from "./image"
-
-interface PostProps {
-  _id: string 
-  img?: string 
-  title: string 
-  slug: string
-  user: {
-    username: string
-  } 
-  category: string 
-  date: string  
-  desc?: string  
-  content: string
-  isFeature: boolean
-  visit: number
-  createdAt: Date
-  updatedAt: Date
-}
-
-interface PostListItemProps {
-  post: PostProps
-}
 
 export default function PostListItem({ post }: PostListItemProps) {
 
