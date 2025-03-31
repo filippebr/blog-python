@@ -2,7 +2,7 @@ import { Link } from "react-router"
 import { format } from "timeago.js"
 import Image from "./image"
 
-interface Post {
+interface PostProps {
   _id: string 
   img?: string 
   title: string 
@@ -21,7 +21,7 @@ interface Post {
 }
 
 interface PostListItemProps {
-  post: Post
+  post: PostProps
 }
 
 export default function PostListItem({ post }: PostListItemProps) {
