@@ -1,24 +1,4 @@
-interface PostProps {
-  _id: string 
-  img?: string 
-  title: string 
-  slug: string
-  user: {
-    username: string
-  } 
-  category: string 
-  date: string  
-  desc?: string  
-  content: string
-  isFeature: boolean
-  visit: number
-  createdAt: Date
-  updatedAt: Date
-}
-
-interface PostListItemProps {
-  post: PostProps
-}
+import type { PostListItemProps } from "~/types/post"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
   return (

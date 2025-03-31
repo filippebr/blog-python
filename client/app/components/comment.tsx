@@ -1,21 +1,6 @@
 import { format } from "timeago.js"
+import type { CommentProps } from "~/types/comment"
 import Image from "./image"
-
-// comment.tsx
-interface CommentProps {
-  comment: {
-    _id: string;
-    user: {
-      _id: string;
-      username?: string;
-      img?: string;
-    };
-    post: string;
-    desc: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
 
 export default function Comment({ comment }: CommentProps) {
   return (
