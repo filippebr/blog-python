@@ -1,4 +1,4 @@
-export default function PostMenuActions() {
+export default function PostMenuActions({post}) {
   return (
     <div className="">
       <h1 className="mt-8 mb-4 text-sm font-medium">Actions</h1>
