@@ -7,7 +7,11 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   const { user } = useUser()
   const { getToken } = useAuth()
 
-  const { isPending, error, data: savedPosts } = useQuery({
+  const { 
+    isPending, 
+    error, 
+    data: savedPosts 
+  } = useQuery({
     queryKey: ["savedPosts"],
     queryFn: async () => {
       const token = await getToken()
@@ -18,6 +22,8 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       })
     },
   })
+
+  const isSaved = savedPosts?.data?.some((p: string) => p === post._id) || false
 
   return (
     <div className="">
