@@ -1,9 +1,23 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
+import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
 import type { PostListItemProps } from "~/types/post"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
   const { user } = useUser()
   const { getToken } = useAuth()
+
+  const { isPending, error, data: savedPosts } = useQuery({
+    queryKey: ["savedPosts"],
+    queryFn: async () => {
+      const token = await getToken()
+      return axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+    },
+  })
 
   return (
     <div className="">
