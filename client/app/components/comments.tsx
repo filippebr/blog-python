@@ -2,36 +2,19 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { toast } from "react-toastify"
-import Comment from "./comment"
-
-interface Comment {
-  _id: string
-  user: {
-    _id: string
-    username?: string | undefined
-    img?: string
-  };
-  post: string
-  desc: string
-  createdAt: string
-  updatedAt: string
-}
-
-interface CommentProps {
-  postId: string
-  desc: string
-}
+import type { CommentProps, CommentsComponentProps, NewComment } from "~/types/comment"
+import Comment from "./comment"; // Keep the component name as Comment
 
 const fetchComments = async(postId: string) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`)
   return res.data
 } 
 
-export default function Comments({ postId }: CommentProps) {
+export default function Comments({ postId, desc }: CommentsComponentProps) {
   const {user} = useUser()
   const { getToken } = useAuth() 
 
-  const { isPending, error, data } = useQuery<Comment[]>({
+  const { isPending, error, data } = useQuery<CommentProps[]>({
     queryKey: ["comments", postId],
     queryFn: () => fetchComments(postId)
   }) 
@@ -39,7 +22,7 @@ export default function Comments({ postId }: CommentProps) {
   const queryClient = useQueryClient()
   
   const mutation = useMutation({
-    mutationFn: async (newComment: CommentProps) => {
+    mutationFn: async (newComment: NewComment) => {
       const token = await getToken()
       return axios.post(`${import.meta.env.VITE_API_URL}/comments/${postId}`, newComment, {
         headers: {
@@ -65,7 +48,7 @@ export default function Comments({ postId }: CommentProps) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
 
-    const data: CommentProps = {
+    const data: NewComment = {
       postId,
       desc: formData.get("desc")?.toString() || "",
     }
@@ -95,7 +78,7 @@ export default function Comments({ postId }: CommentProps) {
           <Comment comment={{
             _id: "temp_id",
             post: postId,
-            desc: `${mutation.variables.desc} (Sending...)`,
+            desc: `${mutation.variables?.desc} (Sending...)`,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             user: {
@@ -106,7 +89,7 @@ export default function Comments({ postId }: CommentProps) {
           }}/>
         )
       }
-        {data.map((comment) => 
+        {data?.map((comment) => 
           <Comment key={comment._id} comment={comment} />
         )}
       </>  

@@ -1,8 +1,8 @@
 import { format } from "timeago.js"
-import type { CommentProps } from "~/types/comment"
+import type { CommentComponentProps } from "~/types/comment"
 import Image from "./image"
 
-export default function Comment({ comment }: CommentProps) {
+export default function Comment({ comment }: CommentComponentProps) {
   return (
     <div className="p-4 bg-slate-50 rounded-xl mb-8">
       <div className="flex items-center gap-4">
