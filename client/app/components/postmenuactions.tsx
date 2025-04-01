@@ -1,12 +1,14 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation, useQuery } from "@tanstack/react-query"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
+import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import type { PostListItemProps } from "~/types/post"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
   const { user } = useUser()
   const { getToken } = useAuth()
+  const navigate = useNavigate()
 
   const { 
     isPending, 
@@ -37,8 +39,20 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     },
     onSuccess: () => {
       toast.success("Post deleted successfully!")
-    }
+      navigate("/")
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data)
+      } else {
+        toast.error('something goest wrong with axios')
+      }
+    },
   })
+
+  const handleDelete = () => {
+    deleteMutation.mutate
+  }
 
   return (
     <div className="">
