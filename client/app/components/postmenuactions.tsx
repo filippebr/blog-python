@@ -1,6 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { toast } from "react-toastify"
 import type { PostListItemProps } from "~/types/post"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
@@ -24,6 +25,20 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   })
 
   const isSaved = savedPosts?.data?.some((p: string) => p === post._id) || false
+
+  const deleteMutation = useMutation({
+    mutationFn: async() => {
+      const token = getToken()
+      return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    },
+    onSuccess: () => {
+      toast.success("Post deleted successfully!")
+    }
+  })
 
   return (
     <div className="">
