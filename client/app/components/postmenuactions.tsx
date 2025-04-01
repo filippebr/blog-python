@@ -30,7 +30,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
 
   const deleteMutation = useMutation({
     mutationFn: async() => {
-      const token = getToken()
+      const token = await getToken()
       return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,13 +45,13 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data)
       } else {
-        toast.error('something goest wrong with axios')
+        toast.error('Something goest wrong with axios')
       }
     },
   })
 
   const handleDelete = () => {
-    deleteMutation.mutate
+    deleteMutation.mutate()
   }
 
   return (
