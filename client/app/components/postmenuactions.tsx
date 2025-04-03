@@ -18,7 +18,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     queryKey: ["savedPosts"],
     queryFn: async () => {
       const token = await getToken()
-      console.log("Token:", token)
+      // console.log("Token:", token)
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   })
 
   const isSaved = savedPosts?.some((p: string) => p === post._id) || false
-  console.log("savedPosts:", savedPosts, "isSaved:", isSaved)
+  // console.log("savedPosts:", savedPosts, "isSaved:", isSaved)
 
   const deleteMutation = useMutation({
     mutationFn: async() => {
@@ -48,9 +48,14 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
-        toast.error(error.response?.data)
+        if (error.response?.status === 401) {
+          toast.error("You need to log in to save posts!")
+          navigate("/login")
+        } else {
+          toast.error(error.response?.data || "An error occurred")
+        }
       } else {
-        toast.error('Something goest wrong with axios')
+        toast.error('Something went wrong with axios')
       }
     },
   })
@@ -73,7 +78,6 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["savedPosts"]})
-      toast.success("Post saved successfully!")
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -120,7 +124,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
               fill={isSaved ? "black" : "none"}
             />
           </svg>
-          <span>Save this post</span>
+          <span>{isSaved ? "Unsave this post" : "Save this post"}</span>
         </div>
       )}
       {user && (post.user.username === user.username) && (
