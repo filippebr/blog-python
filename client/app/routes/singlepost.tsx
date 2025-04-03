@@ -27,7 +27,7 @@ export default function SinglePost() {
 
   if (isPending) return "Loading..."
   if (error ) return "Something went wrong!" + error.message
-  if (!data) return "Posts not found!"
+  if (!data) return "Post not found!"
 
   return (
     <div className="flex flex-col gap-8">

@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { toast } from "react-toastify"
 import type { CommentProps, CommentsComponentProps, NewComment } from "~/types/comment"
-import Comment from "./comment"; // Keep the component name as Comment
+import Comment from "./comment"
 
 const fetchComments = async(postId: string) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`)
