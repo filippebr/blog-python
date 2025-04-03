@@ -30,6 +30,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     enabled: !!user,
   })
 
+  const isAdmin = user?.publicMetadata?.role === "admin" || false
   const isSaved = savedPosts?.some((p: string) => p === post._id) || false
   // console.log("savedPosts:", savedPosts, "isSaved:", isSaved)
 
@@ -83,7 +84,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data)
       } else {
-        toast.error('Something goest wrong with axios')
+        toast.error('Something went wrong with axios')
       }
     },
   })
@@ -128,7 +129,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
           {saveMutation.isPending && <span className="text-xs">(in progress...)</span>}
         </div>
       )}
-      {user && (post.user.username === user.username) && (
+      {user && (post.user.username === user.username || isAdmin) && (
         <div 
           className="flex items-center gap-2 py-2 text-sm cursor-pointer" 
           onClick={handleDelete}
