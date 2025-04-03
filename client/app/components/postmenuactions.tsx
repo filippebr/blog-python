@@ -1,5 +1,5 @@
 import { useAuth, useUser } from "@clerk/clerk-react"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
@@ -18,11 +18,13 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     queryKey: ["savedPosts"],
     queryFn: async () => {
       const token = await getToken()
-      return axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       })
+
+      return res.data
     },
   })
 
@@ -50,33 +52,74 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     },
   })
 
+  const queryClient = useQueryClient()
+
+  const saveMutation = useMutation({
+    mutationFn: async() => {
+      const token = await getToken()
+      return axios.patch(`${import.meta.env.VITE_API_URL}/users/save`, 
+        {
+          postId: post._id,
+        }, 
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["savedPosts"]})
+      toast.success("Post saved successfully!")
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data)
+      } else {
+        toast.error('Something goest wrong with axios')
+      }
+    },
+  })
+
   const handleDelete = () => {
     deleteMutation.mutate()
+  }
+
+  const handleSave = () => {
+    if (!user) {
+      return navigate("/login")
+    }
+    saveMutation.mutate()
   }
 
   return (
     <div className="">
       <h1 className="mt-8 mb-4 text-sm font-medium">Actions</h1>
-      {isPending ?  
-        "Loading..." 
-        : error 
-        ? "Saved Posts fetching failed!" 
-        : <div className="flex items-center gap-2 py-2 text-sm cursor-pointer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 48 48"
-          width="20px"
-          height="20px"
+      {isPending ? (
+        "Loading..."
+      ) : error ? (
+        "Saved Posts fetching failed!"
+      ) : (
+        <div 
+          className="flex items-center gap-2 py-2 text-sm cursor-pointer"
+          onClick={handleSave}
         >
-          <path 
-            d="M12 4C10.3 4 9 5.3 9 7v34l15-9 15 9V7c0-1.7-1.3-3-3-3H12z"
-            stroke="black"
-            strokeWidth="2"
-            fill={isSaved ? "black" : "none"}
-          />
-        </svg>
-        <span>Save this post</span>
-      </div>}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            width="20px"
+            height="20px"
+          >
+            <path 
+              d="M12 4C10.3 4 9 5.3 9 7v34l15-9 15 9V7c0-1.7-1.3-3-3-3H12z"
+              stroke="black"
+              strokeWidth="2"
+              fill={isSaved ? "black" : "none"}
+            />
+          </svg>
+          <span>Save this post</span>
+        </div>
+      )}
       {user && (post.user.username === user.username) && (
         <div 
           className="flex items-center gap-2 py-2 text-sm cursor-pointer" 
