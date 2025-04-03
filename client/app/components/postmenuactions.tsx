@@ -18,6 +18,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     queryKey: ["savedPosts"],
     queryFn: async () => {
       const token = await getToken()
+      console.log("Token:", token)
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -26,9 +27,11 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
 
       return res.data
     },
+    enabled: !!user,
   })
 
-  const isSaved = savedPosts?.data?.some((p: string) => p === post._id) || false
+  const isSaved = savedPosts?.some((p: string) => p === post._id) || false
+  console.log("savedPosts:", savedPosts, "isSaved:", isSaved)
 
   const deleteMutation = useMutation({
     mutationFn: async() => {

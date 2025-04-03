@@ -1,6 +1,7 @@
 import User from "../models/user.model.js"
 
 export const getUserSavedPosts = async(req, res) => {
+  console.log("req.auth:", req.auth)
   const clerkUserId = req.auth.userId
 
   if (!clerkUserId) {
