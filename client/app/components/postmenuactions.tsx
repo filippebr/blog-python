@@ -18,7 +18,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     queryKey: ["savedPosts"],
     queryFn: async () => {
       const token = await getToken()
-      // console.log("Token:", token)
+      console.log("Token:", token)
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -36,8 +36,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
 
   const deleteMutation = useMutation({
     mutationFn: async() => {
-      const token = await getToken()
-      console.log("Token:", token)
+      const token = await getToken()      
       return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
