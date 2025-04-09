@@ -27,7 +27,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
 
       return res.data
     },
-    enabled: !!user,
+    // enabled: !!user,
   })
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false
@@ -37,6 +37,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   const deleteMutation = useMutation({
     mutationFn: async() => {
       const token = await getToken()
+      console.log("Token:", token)
       return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,

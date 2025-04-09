@@ -9,6 +9,7 @@ export const getUserSavedPosts = async(req, res) => {
   }
 
   const user = await User.findOne({ clerkUserId })
+  console.log("User found:", user)
 
   res.status(200).json(user.savedPosts)
 } 
