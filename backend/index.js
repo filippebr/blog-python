@@ -1,7 +1,6 @@
 import { clerkMiddleware } from '@clerk/express'
 import express from "express"
 import connectDB from "./lib/connectDB.js"
-import User from "./models/user.model.js"
 import commentRouter from "./routes/comment.route.js"
 import postRouter from "./routes/post.route.js"
 import userRouter from "./routes/user.route.js"
@@ -40,18 +39,18 @@ app.use(function (req, res, next) {
 // })
 
 // Add for Grok
-app.use(async (req, res, next) => {
-  const clerkUserId = req.auth?.userId;
-  if (clerkUserId) {
-    let user = await User.findOne({ clerkUserId });
-    if (!user) {
-      user = new User({ clerkUserId, savedPosts: [] });
-      await user.save();
-      console.log("Created new user:", user);
-    }
-  }
-  next();
-})
+// app.use(async (req, res, next) => {
+//   const clerkUserId = req.auth?.userId;
+//   if (clerkUserId) {
+//     let user = await User.findOne({ clerkUserId });
+//     if (!user) {
+//       user = new User({ clerkUserId, savedPosts: [] });
+//       await user.save();
+//       console.log("Created new user:", user);
+//     }
+//   }
+//   next();
+// })
 
 app.use("/users", userRouter)
 app.use("/posts", postRouter)

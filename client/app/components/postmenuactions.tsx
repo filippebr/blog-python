@@ -16,18 +16,44 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     data: savedPosts 
   } = useQuery({
     queryKey: ["savedPosts"],
+    // queryFn: async () => {
+    //   const token = await getToken()
+
+    //   if (!token) {
+    //     console.error("No token found!")
+    //     throw new Error("No token available")
+    //   }
+    //   const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     }
+    //   })
+
+    //   return res.data
+    // },
     queryFn: async () => {
       const token = await getToken()
-      console.log("Token:", token)
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
+    
+      if (!token) {
+        console.error("No token found!")
+        throw new Error("Unauthorized: No token")
+      }
+    
+      const apiUrl = import.meta.env.VITE_API_URL
+      if (!apiUrl) {
+        console.error("Missing API URL")
+        throw new Error("Missing API base URL")
+      }
+    
+      const res = await axios.get(`${apiUrl}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       })
-
+    
       return res.data
     },
-    // enabled: !!user,
+    enabled: !!user && !!user.id,
   })
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false
@@ -66,6 +92,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   const saveMutation = useMutation({
     mutationFn: async() => {
       const token = await getToken()
+      
       return axios.patch(`${import.meta.env.VITE_API_URL}/users/save`, 
         {
           postId: post._id,
