@@ -1,40 +1,51 @@
-import { IKImage } from "imagekitio-react"
+import { IKImage } from 'imagekitio-react'
+import { useEffect, useState } from 'react'
 
-// Define the type for a single transformation object
-interface ImageTransformation {
-  quality?: string;
-  crop?: string;
-  [key: string]: string | undefined; // Allow other optional transformation params
-}
+export default function Image({
+  src,
+  className = '',
+  w = 'auto',
+  h = 'auto',
+  alt = '',
+}: {
+  src?: string;
+  className?: string;
+  w?: string;
+  h?: string;
+  alt?: string;
+}) {
+  const safeSrc = src || 'default-image.png'
+  const cleanSrc = safeSrc.replace(/^\/+/, '') // Remove leading slashes
+  const endpoint = import.meta.env.VITE_IMGKIT_URL_ENDPOINT.replace(/\/+$/, '') // Remove trailing slashes
+  const imageKitUrl = `${endpoint}/${cleanSrc}`
 
-type ImageProps = {
-  src: string,
-  className?: string,
-  w?: string,
-  h?: string,
-  alt: string,
-}
+  const [isClient, setIsClient] = useState(false)
 
-export default function Image({src, className, w, h, alt}: ImageProps) {
+  useEffect(() => {
+    setIsClient(true); // Only render IKImage on client
+  }, []);
 
-  // Define the transformation array with the typed structure
-  const transformations: ImageTransformation[] = [
-    {
-      width: w,
-      height: h,
-    },
-  ];
+  console.log('src:', src, 'safeSrc:', safeSrc, 'imageKitUrl:', imageKitUrl);
+
+  if (!isClient) {
+    // Render fallback on server
+    return <img src={imageKitUrl} alt={alt} className={className} loading="lazy" />;
+  }
 
   return (
-    <IKImage 
-      urlEndpoint={import.meta.env.VITE_IMGKIT_URL_ENDPOINT} 
-      path={src}
-      // src="https://ik.imagekit.io/1cfqygcu6/logo.png"
-      className={className} 
+    <IKImage
+      urlEndpoint={import.meta.env.VITE_IMGKIT_URL_ENDPOINT}
+      src={imageKitUrl}
+      className={className}
       loading="lazy"
-      lqip={{active: true, quality: 20}}
+      lqip={{ active: true, quality: 20 }}
       alt={alt}
-      transformation={transformations} // Use the typed transformations array
+      transformation={[
+        {
+          width: w,
+          height: h,
+        },
+      ].filter(trans => Object.keys(trans).length > 0)}
     />
   )
 }

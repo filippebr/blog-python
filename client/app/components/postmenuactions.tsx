@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios"
 import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import type { PostListItemProps } from "~/types/post"
+import { getApiUrl } from "~/utils/getApiUrl"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
   const { user } = useUser()
@@ -39,13 +40,21 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
         throw new Error("Unauthorized: No token")
       }
     
-      const apiUrl = import.meta.env.VITE_API_URL
+      console.log("getApiUrl: ", getApiUrl())
+
+      const apiUrl = getApiUrl()
+
       if (!apiUrl) {
         console.error("Missing API URL")
         throw new Error("Missing API base URL")
       }
+
+      console.log("Calling API:", `${apiUrl}/users/saved`)
+
+      const url = `${apiUrl}/users/saved`
+      console.log("🔥 FINAL GET URL:", url)
     
-      const res = await axios.get(`${apiUrl}/users/saved`, {
+      const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -53,7 +62,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     
       return res.data
     },
-    enabled: !!user && !!user.id,
+    enabled: !!user && !!getToken,
   })
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false
@@ -90,19 +99,38 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   const queryClient = useQueryClient()
 
   const saveMutation = useMutation({
-    mutationFn: async() => {
+    mutationFn: async () => {
       const token = await getToken()
-      
-      return axios.patch(`${import.meta.env.VITE_API_URL}/users/save`, 
-        {
-          postId: post._id,
-        }, 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+
+      console.log("Bearer ", token)
+
+      if (!token) throw new Error("Unauthorized: No token")
+      if (!post || !post._id) throw new Error("Missing post data")
+    
+      const rawUrl = getApiUrl()
+      if (!rawUrl) throw new Error("API base URL missing")
+    
+      const apiUrl = rawUrl.replace(/\/+$/, "") // remove trailing slash
+      const finalUrl = `${apiUrl}/users/save`
+
+      console.log("💥 FINAL URL being passed to Axios:", finalUrl)
+    
+      try {
+        debugger
+        const res = await axios.patch(
+          finalUrl,
+          { postId: post._id },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        return res.data
+      } catch (err) {
+        console.error("Save failed:", err)
+        throw err
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["savedPosts"]})
