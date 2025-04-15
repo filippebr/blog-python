@@ -1,10 +1,9 @@
 import { IKImage } from "imagekitio-react"
 
-// Define the type for a single transformation object
 interface ImageTransformation {
   quality?: string
   crop?: string
-  [key: string]: string | undefined // Allow other optional transformation params
+  [key: string]: string | undefined 
 }
 
 type ImageProps = {
