@@ -113,3 +113,5 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+
+// https://x.com/i/grok?conversation=1912289088691962322
