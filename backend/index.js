@@ -25,33 +25,6 @@ app.use(function (req, res, next) {
   next()
 })
 
-// app.get("/auth-state", (req, res) => {
-//   const authState = req.auth
-//   res.json(authState)
-// })
-
-// app.get("/protect", (req, res) => {
-//   const {userId} = req.auth
-//   if(!userId) {
-//     return res.status(401).json("not authenticated")
-//   }
-//   res.status(200).json("content")
-// })
-
-// Add for Grok
-// app.use(async (req, res, next) => {
-//   const clerkUserId = req.auth?.userId;
-//   if (clerkUserId) {
-//     let user = await User.findOne({ clerkUserId });
-//     if (!user) {
-//       user = new User({ clerkUserId, savedPosts: [] });
-//       await user.save();
-//       console.log("Created new user:", user);
-//     }
-//   }
-//   next();
-// })
-
 app.use("/users", userRouter)
 app.use("/posts", postRouter)
 app.use("/comments", commentRouter)
