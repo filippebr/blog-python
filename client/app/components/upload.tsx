@@ -15,6 +15,14 @@ interface UploadProps<T> {
   setData: React.Dispatch<React.SetStateAction<T>>
 }
 
+interface UploadResponse {
+  fileId: string
+  name: string
+  url: string
+  thumbnailUrl?: string
+  fileType: string
+}
+
 const authenticator = async(): Promise<AuthResponse> => {
   try {    
 
@@ -33,11 +41,9 @@ const authenticator = async(): Promise<AuthResponse> => {
     return { signature, expire, token }
 
   } catch (error) {
-    // Type the error as unknown first, then narrow it down
     if (error instanceof Error) {
       throw new Error(`Authentication request failed: ${error.message}`)
     }
-    // Handle cases where error might not be an Error instance
     throw new Error(`Authentication request failed: Unknown error`)
   }
 }
@@ -56,9 +62,9 @@ export default function Upload<T,>({ children, type, setProgress, setData }: Upl
     }
   }
 
-  const onSuccess = (res: T) => {
+  const onSuccess = (res: UploadResponse) => {
     console.log(res)
-    setData(res)
+    setData(res as T)
   }
 
   const onUploadProgress = (progress: ProgressEvent) => {
