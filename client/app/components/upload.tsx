@@ -3,16 +3,16 @@ import { useRef, type Dispatch, type SetStateAction } from "react"
 import { toast } from "react-toastify"
 
 interface AuthResponse {
-  signature: string;
-  expire: number;
-  token: string;
+  signature: string
+  expire: number
+  token: string
 }
 
 interface UploadProps<T> {
-  children?: React.ReactNode;
-  type: string;
-  setProgress: Dispatch<SetStateAction<number>>;
-  setData: React.Dispatch<React.SetStateAction<T>>;
+  children?: React.ReactNode
+  type: string
+  setProgress: Dispatch<SetStateAction<number>>
+  setData: React.Dispatch<React.SetStateAction<T>>
 }
 
 const authenticator = async(): Promise<AuthResponse> => {
@@ -46,9 +46,14 @@ export default function Upload<T,>({ children, type, setProgress, setData }: Upl
 
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const onError = (err: Error) => {
-    console.log(err)
-    toast.error("Image upload failed!")
+  const onError = (err: Error | React.SyntheticEvent<HTMLInputElement>) => {
+    if (err instanceof Error) {
+      console.error("Upload error:", err)
+      toast.error("Image upload failed!")
+    } else {
+      console.error("Input event error:", err)
+      toast.error("An error occurred with the file input.")
+    }
   }
 
   const onSuccess = (res: T) => {
