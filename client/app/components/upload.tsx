@@ -1,5 +1,5 @@
 import { IKContext, IKUpload } from "imagekitio-react"
-import { useRef, type Dispatch, type SetStateAction } from "react"
+import { useRef, type Dispatch, type SetStateAction, type SyntheticEvent } from "react"
 import { toast } from "react-toastify"
 
 interface AuthResponse {
@@ -46,7 +46,7 @@ export default function Upload<T,>({ children, type, setProgress, setData }: Upl
 
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const onError = (err: Error) => {
+  const onError = (err: Error | SyntheticEvent<HTMLDivElement>) => {
     console.log(err)
     toast.error("Image upload failed!")
   }
