@@ -18,18 +18,6 @@ type PostData = {
   content: string
 }
 
-interface Image {
-  url: string
-}
-
-interface Video {
-  url: string
-}
-
-interface CoverImage {
-  filePath: string;
-}
-
 interface ImageKitUploadResponse {
   fileId: string
   name: string
