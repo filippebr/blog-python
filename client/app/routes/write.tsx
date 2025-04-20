@@ -30,25 +30,37 @@ interface CoverImage {
   filePath: string;
 }
 
+interface ImageKitUploadResponse {
+  fileId: string
+  name: string
+  url: string
+  thumbnailUrl: string
+  height: number
+  width: number
+  size: number
+  fileType: string
+  filePath: string
+  [key: string]: any
+}
+
 export default function Write() {
 
   const { isLoaded, isSignedIn } = useUser()
   const [value, setValue] = useState('')
-  const [cover, setCover] = useState<CoverImage | string>('')
-  const [img, setImg] = useState<string | Image>('')
-  const [video, setVideo] = useState<string | Video>('')
+  const [cover, setCover] = useState<ImageKitUploadResponse | string>('')
+  const [img, setImg] = useState<ImageKitUploadResponse | string>('')
+  const [video, setVideo] = useState<ImageKitUploadResponse | string>('')
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // Type guard to check if img is an Image object
-    if (img) {
-      setValue(prev => prev + `<p><image src="${(img as Image).url}" /></p>`);
+    if (img && typeof img !== "string") {
+      setValue((prev) => prev + `<p><img src="${img.url}" /></p>`)
     }
   }, [img])
 
   useEffect(() => {
-    if (video) {
-      setValue(prev => prev + `<p><iframe class="ql-video" src="${(video as Video).url}" /></p>`);
+    if (video && typeof video !== "string") {
+      setValue((prev) => prev + `<p><iframe class="ql-video" src="${video.url}" /></p>`) // Use video.url
     }
   }, [video])
 
@@ -66,8 +78,6 @@ export default function Write() {
       })
     },
     onSuccess:(res) => {
-      // console.log("Response:", res.data)
-      // console.log("Slug:", res.data.slug)
       toast.success("Post has been created")
       navigate(`/posts/${res.data.slug}`)
     },

@@ -12,7 +12,7 @@ interface UploadProps {
   children?: React.ReactNode
   type: string
   setProgress: Dispatch<SetStateAction<number>>
-  setData: React.Dispatch<React.SetStateAction<ImageKitUploadResponse>>
+  setData: React.Dispatch<React.SetStateAction<ImageKitUploadResponse | string>>
 }
 
 interface ImageKitUploadResponse {
