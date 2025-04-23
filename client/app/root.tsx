@@ -7,6 +7,8 @@ import {
 } from "react-router"
 
 import { ClerkProvider } from '@clerk/clerk-react'
+import "react-quill-new/dist/quill.snow.css"
+import "react-toastify/dist/ReactToastify.css"
 import type { Route } from "./+types/root"
 import "./app.css"
 import MainLayout from "./layouts/mainlayout"
@@ -17,8 +19,6 @@ import {
 } from '@tanstack/react-query'
 
 import { useEffect, useState } from "react"
-// import { ToastContainer } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
 import ToastWrapper from "~/components/toastwrapper"
 
 const queryClient = new QueryClient()

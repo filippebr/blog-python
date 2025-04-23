@@ -48,7 +48,7 @@ export default function Write() {
 
   useEffect(() => {
     if (video && typeof video !== "string") {
-      setValue((prev) => prev + `<p><iframe class="ql-video" src="${video.url}" /></p>`) // Use video.url
+      setValue((prev) => prev + `<p><iframe class="ql-video" src="${video.url}" /></p>`)
     }
   }, [video])
 
