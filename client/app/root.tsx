@@ -7,7 +7,7 @@ import {
 } from "react-router"
 
 import { ClerkProvider } from '@clerk/clerk-react'
-import "react-quill-new/dist/quill.snow.css"
+// import "react-quill-new/dist/quill.snow.css"
 import "react-toastify/dist/ReactToastify.css"
 import type { Route } from "./+types/root"
 import "./app.css"
