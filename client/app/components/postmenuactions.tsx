@@ -16,21 +16,6 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     data: savedPosts 
   } = useQuery({
     queryKey: ["savedPosts"],
-    // queryFn: async () => {
-    //   const token = await getToken()
-
-    //   if (!token) {
-    //     console.error("No token found!")
-    //     throw new Error("No token available")
-    //   }
-    //   const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/saved`, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     }
-    //   })
-
-    //   return res.data
-    // },
     queryFn: async () => {
       const token = await getToken()
     

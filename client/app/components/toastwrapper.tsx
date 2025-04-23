@@ -1,13 +1,15 @@
 // ToastWrapper.tsx
 import { useEffect, useState } from 'react'
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 export default function ToastWrapper() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Dynamically import the Toastify CSS on mount
+    import('react-toastify/dist/ReactToastify.css').then(() => {
+      setIsMounted(true);
+    });
   }, []);
 
   if (!isMounted) return null;
