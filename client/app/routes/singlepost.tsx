@@ -9,7 +9,12 @@ import Search from "~/components/search"
 
 const fetchPost = async(slug: string) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`)
-  return res.data
+  // res.data
+  // Compute formatted date on the server
+  return {
+    ...res.data,
+    formattedCreatedAt: format(res.data.createdAt), // Add formatted date
+  };
 } 
 
 export default function SinglePost() {
@@ -42,7 +47,7 @@ export default function SinglePost() {
             <Link to="" className="text-blue-800">{data.user.username}</Link>
             <span>on</span>
             <Link to="" className="text-blue-800">{data.category}</Link>
-            <span>{format(data.createdAt)}</span>
+            <span>{data.formattedCreatedAt}</span>
           </div>     
           <p className="text-gray-500 font-medium ">
             {data.desc} 
