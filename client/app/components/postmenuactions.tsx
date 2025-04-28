@@ -2,7 +2,7 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { useNavigate } from "react-router"
-import { toast } from "react-toastify"
+// import { toast } from "react-toastify"
 import type { PostListItemProps } from "~/types/post"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
@@ -55,19 +55,19 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       })
     },
     onSuccess: () => {
-      toast.success("Post deleted successfully!")
+      // toast.success("Post deleted successfully!")
       navigate("/")
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
-          toast.error("You need to log in to save posts!")
+          // toast.error("You need to log in to save posts!")
           navigate("/login")
         } else {
-          toast.error(error.response?.data || "An error occurred")
+          // toast.error(error.response?.data || "An error occurred")
         }
       } else {
-        toast.error('Something went wrong with axios')
+        // toast.error('Something went wrong with axios')
       }
     },
   })
@@ -94,9 +94,9 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
-        toast.error(error.response?.data)
+        // toast.error(error.response?.data)
       } else {
-        toast.error('Something went wrong with axios')
+        // toast.error('Something went wrong with axios')
       }
     },
   })

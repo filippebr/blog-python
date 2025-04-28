@@ -1,6 +1,6 @@
 import { IKContext, IKUpload } from "imagekitio-react"
 import { useRef, type Dispatch, type SetStateAction, type SyntheticEvent } from "react"
-import { toast } from "react-toastify"
+// import { toast } from "react-toastify"
 
 interface AuthResponse {
   signature: string
@@ -60,7 +60,7 @@ export default function Upload({ children, type, setProgress, setData }: UploadP
 
   const onError = (err: Error | SyntheticEvent<HTMLDivElement>) => {
     console.log(err)
-    toast.error("Image upload failed!")
+    // toast.error("Image upload failed!")
   }
 
   const onSuccess = (res: ImageKitUploadResponse) => {

@@ -1,7 +1,7 @@
 import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { isRouteErrorResponse, Links, Meta, Scripts, ScrollRestoration } from 'react-router'
-import ToastWrapper from '~/components/toastwrapper'
+// import ToastWrapper from '~/components/toastwrapper'
 import type { Route } from './+types/root'
 import './app.css'
 import MainLayout from './layouts/mainlayout'
@@ -49,7 +49,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
     >
       <QueryClientProvider client={queryClient}>
         <MainLayout />
-        <ToastWrapper />
+        {/* <ToastWrapper /> */}
       </QueryClientProvider>
     </ClerkProvider>
   );
