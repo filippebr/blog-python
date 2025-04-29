@@ -23,6 +23,8 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       }
 
       const token = await getToken()
+
+      console.log("Token:", token) // Debug token
     
       if (!token) {
         console.error("No token found!")
