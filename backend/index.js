@@ -13,7 +13,14 @@ const app = express()
 // app.use(cors(process.env.CLIENT_URL))
 app.use(cors({origin: process.env.CLIENT_URL, credentials: true}))
 
-app.use(clerkMiddleware())
+// app.use(clerkMiddleware())
+app.use(clerkMiddleware((err, req, res, next) => {
+  if (err) {
+    console.error("Clerk middleware error:", err)
+    return res.status(401).json({ message: "Authentication failed" })
+  }
+  next()
+}))
 app.use(express.json())
 app.use("/webhooks", webhookRouter)
 
