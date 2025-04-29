@@ -8,7 +8,6 @@ export const getUserSavedPosts = async (req, res) => {
   }
 
   const user = await User.findOne({ clerkUserId })
-  console.log("User found:", user)
 
   if (!user) {
     return res.status(404).json("User not found in database!")
