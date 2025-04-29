@@ -6,8 +6,8 @@ import type { PostListItemProps } from "~/types/post"
 // import { toast } from "react-toastify"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
-  const { user } = useUser()
-  const { getToken } = useAuth()
+  const { user, isLoaded: isUserLoaded } = useUser()
+  const { getToken, isLoaded: isAuthLoaded  } = useAuth()
   const navigate = useNavigate()
 
   const { 
@@ -17,6 +17,10 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   } = useQuery({
     queryKey: ["savedPosts"],
     queryFn: async () => {
+      if (!isAuthLoaded || !isUserLoaded) {
+        throw new Error("Authentication not ready")
+      }
+
       const token = await getToken()
     
       if (!token) {

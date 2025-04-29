@@ -37,7 +37,7 @@ export const clerkWebHook = async(req, res) => {
   if (evt.type === "user.deleted") {
     const deletedUser = await User.findOneAndDelete({
       clerkUserId: evt.data.id,
-    });
+    })
 
     await Post.deleteMany({user:deletedUser._id})
     await Comment.deleteMany({user:deletedUser._id})
