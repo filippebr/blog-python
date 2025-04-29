@@ -6,8 +6,8 @@ import type { PostListItemProps } from "~/types/post"
 // import { toast } from "react-toastify"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
-  const { user } = useUser()
-  const { getToken } = useAuth()
+  const { user, isLoaded: isAuthLoaded } = useUser()
+  const { getToken, isLoaded: isUserLoaded } = useAuth()
   const navigate = useNavigate()
 
   const { 
@@ -17,6 +17,10 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   } = useQuery({
     queryKey: ["savedPosts"],
     queryFn: async () => { 
+
+      if (!isAuthLoaded || !isUserLoaded) {
+        throw new Error("Authentication not ready")
+      }
 
       const token = await getToken()
     
@@ -40,6 +44,11 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       return res.data
     },
     // enabled: isAuthLoaded && isUserLoaded && !!user && !!user.id,
+    enabled: isAuthLoaded && isUserLoaded && !!user && !!user.id,
+    retry: (failureCount, error) => {
+      if (error.message.includes("401")) return false
+      return failureCount < 3
+    },
   })
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false
@@ -53,7 +62,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       if (!token) {
         throw new Error("Unauthorized: No token")
       }    
-      
+
       return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -108,6 +117,10 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
       } else {
         // toast.error('Something went wrong with axios')
       }
+    },
+    retry: (failureCount, error) => {
+      if (error.message.includes("401")) return false
+      return failureCount < 3
     },
   })
 
