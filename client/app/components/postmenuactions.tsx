@@ -2,8 +2,8 @@ import { useAuth, useUser } from "@clerk/clerk-react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { useNavigate } from "react-router"
-// import { toast } from "react-toastify"
 import type { PostListItemProps } from "~/types/post"
+// import { toast } from "react-toastify"
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
   const { user } = useUser()
@@ -29,8 +29,12 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
         console.error("Missing API URL")
         throw new Error("Missing API base URL")
       }
+
+      const apiUrlSaved = `${apiUrl}/users/saved`
+
+      console.log(apiUrlSaved)
     
-      const res = await axios.get(`${apiUrl}/users/saved`, {
+      const res = await axios.get(apiUrlSaved, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
