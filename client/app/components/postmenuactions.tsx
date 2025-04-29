@@ -16,7 +16,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     data: savedPosts 
   } = useQuery({
     queryKey: ["savedPosts"],
-    queryFn: async () => {     
+    queryFn: async () => { 
 
       const token = await getToken()
     
@@ -30,12 +30,8 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
         console.error("Missing API URL")
         throw new Error("Missing API base URL")
       }
-
-      const apiUrlSaved = `${apiUrl}/users/saved`
-
-      console.log(apiUrlSaved)
     
-      const res = await axios.get(apiUrlSaved, {
+      const res = await axios.get(`${apiUrl}/users/saved`, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -43,7 +39,7 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     
       return res.data
     },
-    enabled: !!user && !!user.id,
+    // enabled: isAuthLoaded && isUserLoaded && !!user && !!user.id,
   })
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false
@@ -52,7 +48,12 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
 
   const deleteMutation = useMutation({
     mutationFn: async() => {
-      const token = await getToken()      
+      const token = await getToken()  
+
+      if (!token) {
+        throw new Error("Unauthorized: No token")
+      }    
+      
       return axios.delete(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -82,6 +83,10 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   const saveMutation = useMutation({
     mutationFn: async() => {
       const token = await getToken()
+
+      if (!token) {
+        throw new Error("Unauthorized: No token")
+      }
       
       return axios.patch(`${import.meta.env.VITE_API_URL}/users/save`, 
         {
