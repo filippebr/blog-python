@@ -82,10 +82,4 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       )}
     </main>
   );
-<<<<<<< HEAD
 }
-=======
-}
-
-// https://x.com/i/grok?conversation=1912289088691962322
->>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
