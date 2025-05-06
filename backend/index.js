@@ -25,6 +25,18 @@ app.use(clerkMiddleware((err, req, res, next) => {
 app.use(express.json())
 app.use("/webhooks", webhookRouter)
 
+<<<<<<< HEAD
+=======
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  next()
+})
+
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
 app.use("/users", userRouter)
 app.use("/posts", postRouter)
 app.use("/comments", commentRouter)

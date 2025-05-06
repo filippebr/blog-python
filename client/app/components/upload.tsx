@@ -8,6 +8,7 @@ interface AuthResponse {
   token: string
 }
 
+<<<<<<< HEAD
 interface UploadProps {
   children?: React.ReactNode
   type: string
@@ -25,6 +26,21 @@ interface ImageKitUploadResponse {
   size: number
   fileType: string
   filePath: string
+=======
+interface UploadProps<T> {
+  children?: React.ReactNode
+  type: string
+  setProgress: Dispatch<SetStateAction<number>>
+  setData: React.Dispatch<React.SetStateAction<T>>
+}
+
+interface UploadResponse {
+  fileId: string
+  name: string
+  url: string
+  thumbnailUrl?: string
+  fileType: string
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
 }
 
 const authenticator = async(): Promise<AuthResponse> => {
@@ -45,11 +61,9 @@ const authenticator = async(): Promise<AuthResponse> => {
     return { signature, expire, token }
 
   } catch (error) {
-    // Type the error as unknown first, then narrow it down
     if (error instanceof Error) {
       throw new Error(`Authentication request failed: ${error.message}`)
     }
-    // Handle cases where error might not be an Error instance
     throw new Error(`Authentication request failed: Unknown error`)
   }
 }
@@ -58,14 +72,28 @@ export default function Upload({ children, type, setProgress, setData }: UploadP
 
   const ref = useRef<HTMLInputElement | null>(null)
 
+<<<<<<< HEAD
   const onError = (err: Error | SyntheticEvent<HTMLDivElement>) => {
     console.log(err)
     // toast.error("Image upload failed!")
   }
 
   const onSuccess = (res: ImageKitUploadResponse) => {
+=======
+  const onError = (err: Error | React.SyntheticEvent<HTMLInputElement>) => {
+    if (err instanceof Error) {
+      console.error("Upload error:", err)
+      toast.error("Image upload failed!")
+    } else {
+      console.error("Input event error:", err)
+      toast.error("An error occurred with the file input.")
+    }
+  }
+
+  const onSuccess = (res: UploadResponse) => {
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
     console.log(res)
-    setData(res)
+    setData(res as T)
   }
 
   const onUploadProgress = (progress: ProgressEvent) => {

@@ -3,7 +3,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { useNavigate } from "react-router"
 import type { PostListItemProps } from "~/types/post"
+<<<<<<< HEAD
 // import { toast } from "react-toastify"
+=======
+import { getApiUrl } from "~/utils/getApiUrl"
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
 
 export default function PostMenuActions({ post }: PostListItemProps ) {
   const { user, isLoaded: isAuthLoaded } = useUser()
@@ -31,13 +35,21 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
         throw new Error("Unauthorized: No token")
       }
     
-      const apiUrl = import.meta.env.VITE_API_URL
+      console.log("getApiUrl: ", getApiUrl())
+
+      const apiUrl = getApiUrl()
+
       if (!apiUrl) {
         console.error("Missing API URL")
         throw new Error("Missing API base URL")
       }
+
+      console.log("Calling API:", `${apiUrl}/users/saved`)
+
+      const url = `${apiUrl}/users/saved`
+      console.log("🔥 FINAL GET URL:", url)
     
-      const res = await axios.get(`${apiUrl}/users/saved`, {
+      const res = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -45,12 +57,16 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
     
       return res.data
     },
+<<<<<<< HEAD
     // enabled: isAuthLoaded && isUserLoaded && !!user && !!user.id,
     enabled: isAuthLoaded && isUserLoaded && !!user && !!user.id,
     retry: (failureCount, error) => {
       if (error.message.includes("401")) return false
       return failureCount < 3
     },
+=======
+    enabled: !!user && !!getToken,
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
   })
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false
@@ -92,9 +108,10 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
   const queryClient = useQueryClient()
 
   const saveMutation = useMutation({
-    mutationFn: async() => {
+    mutationFn: async () => {
       const token = await getToken()
 
+<<<<<<< HEAD
       if (!token) {
         throw new Error("Unauthorized: No token")
       }
@@ -109,6 +126,37 @@ export default function PostMenuActions({ post }: PostListItemProps ) {
           },
         }
       )
+=======
+      console.log("Bearer ", token)
+
+      if (!token) throw new Error("Unauthorized: No token")
+      if (!post || !post._id) throw new Error("Missing post data")
+    
+      const rawUrl = getApiUrl()
+      if (!rawUrl) throw new Error("API base URL missing")
+    
+      const apiUrl = rawUrl.replace(/\/+$/, "") // remove trailing slash
+      const finalUrl = `${apiUrl}/users/save`
+
+      console.log("💥 FINAL URL being passed to Axios:", finalUrl)
+    
+      try {
+        debugger
+        const res = await axios.patch(
+          finalUrl,
+          { postId: post._id },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        return res.data
+      } catch (err) {
+        console.error("Save failed:", err)
+        throw err
+      }
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["savedPosts"]})

@@ -9,11 +9,18 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@clerk/clerk-react": "^5.30.1",
     "@clerk/react-router": "1.1.0",
     "@react-router/node": "7.1.5",
     "@react-router/serve": "7.1.5",
     "@tailwindcss/vite": "^4.1.4",
+=======
+    "@clerk/clerk-react": "5.23.0",
+    "@clerk/react-router": "1.1.0",
+    "@react-router/node": "7.2.0",
+    "@react-router/serve": "7.2.0",
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
     "@tanstack/react-query": "5.67.3",
     "axios": "1.8.3",
     "imagekitio-react": "4.3.0",
@@ -23,6 +30,7 @@
     "react-dom": "19.0.0",
     "react-infinite-scroll-component": "6.1.0",
     "react-quill-new": "3.3.3",
+<<<<<<< HEAD
     "react-router": "7.1.5",
     "react-toastify": "11.0.5",
     "tailwindcss": "^4.1.4",
@@ -30,10 +38,23 @@
   },
   "devDependencies": {
     "@react-router/dev": "7.1.5",
+=======
+    "react-router": "7.2.0",
+    "react-toastify": "11.0.5",
+    "timeago.js": "4.0.2"
+  },
+  "devDependencies": {
+    "@react-router/dev": "7.2.0",
+    "@tailwindcss/vite": "4.0.0",
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
     "@types/node": "20",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.1",
     "react-router-devtools": "1.1.0",
+<<<<<<< HEAD
+=======
+    "tailwindcss": "4.0.0",
+>>>>>>> 5cf5dc53a0fa630be940045c69cb76e86f347bed
     "typescript": "5.7.2",
     "vite": "5.4.11",
     "vite-tsconfig-paths": "5.1.4"
