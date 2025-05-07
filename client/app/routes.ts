@@ -8,16 +8,9 @@ export default [
   route("login", "routes/login.tsx"),
   route("register", "routes/register.tsx"),
 
-  // Nested Routes
-  // route("dashboard", "routes/dashboard.tsx", [
-  //   route("finances", "routes/finances.tsx"),
-  //   route("personal-info", "routes/personal-info.tsx"),
-  // ]),
-
   // prefix Routes
   ...prefix("posts", [
     index("routes/postlistpage.tsx"),
     route(":slug", "routes/singlepost.tsx"),
   ]),
-  // route("singlepost", "routes/singlepost.tsx"),
 ] satisfies RouteConfig;
